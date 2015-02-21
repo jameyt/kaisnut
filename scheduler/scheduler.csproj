@@ -55,6 +55,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assignment.cs" />
+    <Compile Include="IAssignment.cs" />
+    <Compile Include="IContact.cs" />
+    <Compile Include="IEmployee.cs" />
+    <Compile Include="IRepository.cs" />
+    <Compile Include="ISchedule.cs" />
+    <Compile Include="Repository.cs" />
     <Compile Include="Role.cs" />
     <Compile Include="Contact.cs" />
     <Compile Include="Day.cs" />
@@ -81,12 +87,6 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="scheduler.core\scheduler.core.csproj">
-      <Project>{945b1d3d-d6d9-4fb9-bfe5-7ba36b1e21be}</Project>
-      <Name>scheduler.core</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

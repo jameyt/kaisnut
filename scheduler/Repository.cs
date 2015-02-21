@@ -7,20 +7,27 @@ using scheduler.core;
 
 namespace scheduler.data
 {
-    public class LocalDal:IDataAccessLayer
+    public class Repository:IRepository
     {
-        public System.Data.IDbConnection Connection
+        private Repository() { }
+
+        public static Repository Create()
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            return new Repository(){};
         }
-        
+
+        public List<IAssignment> Assignments
+        {
+            get { return GetAssignments(); }
+            set { SaveAssignments(value); }
+        }
+
+        public List<IEmployee> Employees
+        {
+            get { return GetEmployees(); }
+            set { SaveEmployees(value); }
+        }
+
         public void SaveEmployees(List<IEmployee> value)
         {
             throw new NotImplementedException();

@@ -61,19 +61,18 @@ namespace scheduler.tests
                   "123 S Main St Tulsa OK 74107"
                   ));
 
-            var assignment = Assignment.Create(Role.First, 
+            var assignment = Assignment.Create(Role.First,
                 employee,
-                new DateTime(2015,3,1));
+                new DateTime(2015, 3, 1));
             assignment.Role = Role.First;
-          
-            var date = DateTime.Now.AddDays(17);
+
             employee.Contact.Phone = "555-555-5555";
             employee.Contact.Email = "joe.smith@google.com";
             employee.Contact.Address = "123 S Main St Tulsa OK 74107";
             assignment.Employee = employee;
-            schedule.AddAssignment( assignment);
+            schedule.AddAssignment(assignment);
 
-            Assert.AreEqual(1,schedule.Years[1].Months[2].Days[9].Assignments.Count);
+            Assert.AreEqual(1, schedule.Years[1].Months[2].Days[0].Assignments.Count);
         }
     }
 }

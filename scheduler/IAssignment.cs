@@ -9,7 +9,7 @@ namespace scheduler
    public interface IAssignment
     {
        Role Role { get; set; }
-       Employee Employee { get; set; }
+       IEmployee Employee { get; set; }
        DateTime Date { get; set; }
 
 

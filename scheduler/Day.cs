@@ -6,21 +6,21 @@ using System.Threading.Tasks;
 
 namespace scheduler
 {
-   public class Day
+   public class Day:IDay
     {
       public List<Role> Roles { get; private set; }
 
-      public List<Assignment> Assignments { get; private set; }
+      public List<IAssignment> Assignments { get; private set; }
 
-      public List<Employee> Employees { get; private set; }
+      public List<IEmployee> Employees { get; private set; }
 
       public DateTime Date { get; private set; }
 
        private Day(){}
 
-       public static Day Create(List<Assignment> assignments, DateTime date)
+       public static Day Create(List<IAssignment> assignments, DateTime date)
        {
-           if (assignments == null) { assignments = new List<Assignment>();}
+           if (assignments == null) { assignments = new List<IAssignment>();}
            return new Day()
            {
                Roles = (from assignment in assignments select assignment.Role).ToList(),
@@ -30,7 +30,7 @@ namespace scheduler
            };
        }
 
-       public List<Assignment> GetAssignmentsByEmployee(Employee employee   )
+       public List<IAssignment> GetAssignmentsByEmployee(IEmployee employee   )
        {
            return (from assignment in Assignments 
                   where employee.Equals(assignment.Employee) 

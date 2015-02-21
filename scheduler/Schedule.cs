@@ -15,14 +15,14 @@ namespace scheduler
         //public Month CurrentMonth { get; set; }
         //public Year CurrentYear { get; set; }
 
-        public List<Year> Years { get; set; }
+        public List<IYear> Years { get; set; }
 
         private Schedule()
         {
 
         }
 
-        public static Schedule Create(IRepository repository)
+        public static ISchedule Create(IRepository repository)
         {
             return new Schedule()
             {
@@ -30,11 +30,11 @@ namespace scheduler
             };
         }
 
-        public static Schedule CreateEmptyThreeYear()
+        public static ISchedule CreateEmptyThreeYear()
         {
             var schedule = new Schedule
             {
-                Years = new List<Year>
+                Years = new List<IYear>
                 {
                     Year.Create(DateTime.Now.AddYears(-1)),
                     Year.Create(DateTime.Now),
@@ -44,11 +44,11 @@ namespace scheduler
             return schedule;
         }
 
-        public static Schedule CreateEmptyThisYear()
+        public static ISchedule CreateEmptyThisYear()
         {
             var schedule = new Schedule
             {
-                Years = new List<Year>
+                Years = new List<IYear>
                 {
                     Year.Create(DateTime.Now)
                  }
@@ -60,8 +60,13 @@ namespace scheduler
         {
             foreach (var year in Years.Where(year => year.Date.Year == assignment.Date.Year))
             {
-                year.AddAssignment(assignment.Date, assignment);
+                year.AddAssignment( assignment);
             }
+        }
+
+        public void GetAssignment(DateTime date)
+        {
+            
         }
     }
 }

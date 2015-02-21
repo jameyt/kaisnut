@@ -6,17 +6,17 @@ using System.Threading.Tasks;
 
 namespace scheduler
 {
-    public class Year
+    public class Year : IYear
     {
-        public DateTime Date { get; private set; }
-        public List<Month> Months { get; private set; }
+        public DateTime Date { get; set; }
+        public List<IMonth> Months { get; private set; }
 
         private Year()
         {
 
         }
 
-        public static Year Create(DateTime date)
+        public static IYear Create(DateTime date)
         {
             var year = new Year();
             year.Date = date;
@@ -27,7 +27,7 @@ namespace scheduler
 
         private void AddMonths()
         {
-            if (Months == null) { Months = new List<Month>(); }
+            if (Months == null) { Months = new List<IMonth>(); }
             var month = new DateTime(Date.Year, 1, 1);
             while (month.Year == Date.Year)
             {
@@ -37,38 +37,35 @@ namespace scheduler
         }
 
 
-        internal void AddAssignment(DateTime date, Assignment assignment)
+        public void AddAssignment(IAssignment assignment)
         {
-            foreach (var month in Months)
+            foreach (var month in Months.Where(month => month.Date.Month == assignment.Date.Month))
             {
-                if (month.Date.Month == date.Month)
-                {
-                    month.AddAssignment(date, assignment);
-                }
+                month.AddAssignment(assignment.Date, assignment);
             }
         }
 
-        public List<Assignment> GetAssignments()
+        public List<IAssignment> GetAssignments()
         {
             return Months.SelectMany(month => month.GetAssignments()).ToList();
         }
 
-        public List<Assignment> GetAssignments(Employee employee)
+        public List<IAssignment> GetAssignments(IEmployee employee)
         {
             return (from assignment in GetAssignments()
                     where employee.Equals(assignment.Employee)
                     select assignment).ToList();
         }
 
-        public List<Assignment> GetAssignments(DateTime date)
+        public List<IAssignment> GetAssignments(DateTime date)
         {
             return Months
                 .Where(month => month.Date.Month == date.Month)
-                .SelectMany( month => month.GetAssignments())
+                .SelectMany(month => month.GetAssignments())
                 .ToList();
         }
 
-        public List<Assignment> GetAssignments(Employee employee, DateTime date)
+        public List<IAssignment> GetAssignments(IEmployee employee, DateTime date)
         {
             return GetAssignments(date).Where(assignment => assignment.Employee == employee).ToList();
         }

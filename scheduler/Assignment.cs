@@ -9,7 +9,7 @@ namespace scheduler
     public class Assignment:IAssignment
     {
         public Role Role { get; set; }
-        public Employee Employee { get; set; }
+        public IEmployee Employee { get; set; }
         public DateTime Date { get; set; }
 
         private Assignment(){}

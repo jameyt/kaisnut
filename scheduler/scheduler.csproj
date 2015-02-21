@@ -57,10 +57,13 @@
     <Compile Include="Assignment.cs" />
     <Compile Include="IAssignment.cs" />
     <Compile Include="IContact.cs" />
+    <Compile Include="IDay.cs" />
     <Compile Include="IEmployee.cs" />
+    <Compile Include="IMonth.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="ISchedule.cs" />
     <Compile Include="IVacation.cs" />
+    <Compile Include="IYear.cs" />
     <Compile Include="MockRepository.cs" />
     <Compile Include="Repository.cs" />
     <Compile Include="Role.cs" />

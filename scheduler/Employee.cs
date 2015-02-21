@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace scheduler
 {
-    public class Employee : IEquatable<Employee>
+    public class Employee :IEmployee
     {
         public string First { get; set; }
         public string Last { get; set; }

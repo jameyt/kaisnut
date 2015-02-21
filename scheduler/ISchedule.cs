@@ -10,7 +10,7 @@ namespace scheduler
     public interface ISchedule
     {
 
-        List<Year> Years { get; set; }
+        List<IYear> Years { get; set; }
 
         void AddAssignment(Assignment assignment);
 

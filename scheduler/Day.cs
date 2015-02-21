@@ -20,6 +20,7 @@ namespace scheduler
 
        public static Day Create(List<Assignment> assignments, DateTime date)
        {
+           if (assignments == null) { assignments = new List<Assignment>();}
            return new Day()
            {
                Roles = (from assignment in assignments select assignment.Role).ToList(),
@@ -28,5 +29,13 @@ namespace scheduler
                Date = date,
            };
        }
+
+       public List<Assignment> GetAssignmentsByEmployee(Employee employee   )
+       {
+           return (from assignment in Assignments 
+                  where employee.Equals(assignment.Employee) 
+                  select assignment).ToList();
+       }
+
     }
 }

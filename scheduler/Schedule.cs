@@ -33,5 +33,16 @@ namespace scheduler
             schedule.Years.Add(Year.Create(DateTime.Now.AddYears(1)));
             return schedule;
         }
+
+        public void AddAssignment(DateTime date,Assignment assignment)
+        {
+            foreach (var year in Years)
+            {
+                if (year.Date.Year == date.Year)
+                {
+                    year.AddAssignment(date,assignment);
+                }
+            }
+        }
     }
 }

@@ -11,5 +11,8 @@ namespace scheduler
         public Role Role { get; set; }
         public Employee Employee { get; set; }
 
+        private Assignment(){}
+
+        public static Assignment Create() { return new Assignment();}
     }
 }

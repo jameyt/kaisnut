@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace scheduler
 {
-  public  interface IContact
+   public interface IVacation
     {
     }
 }

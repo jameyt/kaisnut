@@ -60,6 +60,7 @@
     <Compile Include="IEmployee.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="ISchedule.cs" />
+    <Compile Include="IVacation.cs" />
     <Compile Include="MockRepository.cs" />
     <Compile Include="Repository.cs" />
     <Compile Include="Role.cs" />

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace scheduler.core
+namespace scheduler
 {
   public  interface IEmployee
     {

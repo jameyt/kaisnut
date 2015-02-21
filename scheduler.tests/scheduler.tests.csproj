@@ -51,6 +51,7 @@
   </Choose>
   <ItemGroup>
     <Compile Include="Acceptance.cs" />
+    <Compile Include="BindingService.cs" />
     <Compile Include="Unit.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -67,6 +68,15 @@
       <Project>{bec1468f-9680-45e5-a840-b3d13dc69c9b}</Project>
       <Name>scheduler.data</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="local.mdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="local_log.ldf">
+      <DependentUpon>local.mdf</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

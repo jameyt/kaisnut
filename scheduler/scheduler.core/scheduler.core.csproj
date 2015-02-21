@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="IAssignment.cs" />
     <Compile Include="IContact.cs" />
+    <Compile Include="IDataAccessLayer.cs" />
     <Compile Include="IEmployee.cs" />
     <Compile Include="IRepository.cs" />
     <Compile Include="ISchedule.cs" />

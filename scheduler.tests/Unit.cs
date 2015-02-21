@@ -11,7 +11,7 @@ namespace scheduler.tests
         [TestMethod]
         public void CreateSchedule()
         {
-            var repo = LocalRepository.Create();
+            var repo = Repository.Create();
             var schedule = Schedule.Create(repo);
         }
 

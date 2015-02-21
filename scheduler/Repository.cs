@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,11 +10,13 @@ namespace scheduler.data
 {
     public class Repository:IRepository
     {
+        private IDbConnection Connection { get; set; }
+
         private Repository() { }
 
-        public static Repository Create()
+        public static Repository Create(IDbConnection cn)
         {
-            return new Repository(){};
+            return new Repository(){Connection = cn};
         }
 
         public List<IAssignment> Assignments

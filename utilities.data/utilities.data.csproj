@@ -4,28 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{588A2D27-8656-4967-92A8-F4C94B3A22A1}</ProjectGuid>
+    <ProjectGuid>{D8D8EF1B-A4D8-4C7B-9797-02189C33B982}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>scheduler</RootNamespace>
-    <AssemblyName>scheduler</AssemblyName>
+    <RootNamespace>utilities.data</RootNamespace>
+    <AssemblyName>utilities.data</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <PublishUrl>publish\</PublishUrl>
-    <Install>true</Install>
-    <InstallFrom>Disk</InstallFrom>
-    <UpdateEnabled>false</UpdateEnabled>
-    <UpdateMode>Foreground</UpdateMode>
-    <UpdateInterval>7</UpdateInterval>
-    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
-    <UpdatePeriodically>false</UpdatePeriodically>
-    <UpdateRequired>false</UpdateRequired>
-    <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>0</ApplicationRevision>
-    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
-    <IsWebBootstrapper>false</IsWebBootstrapper>
-    <UseApplicationTrust>false</UseApplicationTrust>
-    <BootstrapperEnabled>true</BootstrapperEnabled>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -54,40 +39,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assignment.cs" />
-    <Compile Include="IAssignment.cs" />
-    <Compile Include="IContact.cs" />
-    <Compile Include="IEmployee.cs" />
-    <Compile Include="IRepository.cs" />
-    <Compile Include="ISchedule.cs" />
-    <Compile Include="MockRepository.cs" />
-    <Compile Include="Repository.cs" />
-    <Compile Include="Role.cs" />
-    <Compile Include="Contact.cs" />
-    <Compile Include="Day.cs" />
-    <Compile Include="Employee.cs" />
-    <Compile Include="Month.cs" />
+    <Compile Include="DataInteraction.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Schedule.cs" />
-    <Compile Include="Vacation.cs" />
-    <Compile Include="Year.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <BootstrapperPackage Include=".NETFramework,Version=v4.5">
-      <Visible>False</Visible>
-      <ProductName>Microsoft .NET Framework 4.5 %28x86 and x64%29</ProductName>
-      <Install>true</Install>
-    </BootstrapperPackage>
-    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
-      <Visible>False</Visible>
-      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
-      <Install>false</Install>
-    </BootstrapperPackage>
-    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
-      <Visible>False</Visible>
-      <ProductName>.NET Framework 3.5 SP1</ProductName>
-      <Install>false</Install>
-    </BootstrapperPackage>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

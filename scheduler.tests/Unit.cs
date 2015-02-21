@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data.SqlClient;
 using System.Runtime.InteropServices;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using scheduler.data;
@@ -11,7 +12,13 @@ namespace scheduler.tests
         [TestMethod]
         public void CreateSchedule()
         {
-            var repo = Repository.Create();
+            var cs = @"Data Source=(LocalDB)\v11.0;
+                          AttachDbFilename=C:\Users\tyler-eg\Source\Repos\kaisnut\scheduler.tests\local.mdf;
+                          Integrated Security=True;
+                          Connect Timeout=30;";
+            var cn = new SqlConnection(cs);
+            cn.Open();
+            var repo = Repository.Create(cn);
             var schedule = Schedule.Create(repo);
         }
 
@@ -45,11 +52,11 @@ namespace scheduler.tests
             var schedule = Schedule.CreateEmptyThreeYear();
             var assignment = Assignment.Create();
             assignment.Role = Role.First;
-            var employee = new Employee
+            var employee = Employee.Create("Joe", "Smith", DateTime.Now);
             {
                 Contact = Contact.Create(),
-                FirstName = "Joe",
-                LastName = "Smith"
+                First = "Joe",
+                Last = "Smith"
             };
             var date = DateTime.Now.AddDays(17);
             employee.Contact.Phone = "555-555-5555";

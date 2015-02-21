@@ -7,13 +7,13 @@ using scheduler.data;
 
 namespace scheduler
 {
-    public class Schedule
+    public class Schedule:ISchedule
     {
         private IRepository repo;
 
-        public Day CurrentDay { get; set; }
-        public Month CurrentMonth { get; set; }
-        public Year CurrentYear { get; set; }
+        //public Day CurrentDay { get; set; }
+        //public Month CurrentMonth { get; set; }
+        //public Year CurrentYear { get; set; }
 
         public List<Year> Years { get; set; }
 
@@ -56,11 +56,11 @@ namespace scheduler
             return schedule;
         }
 
-        public void AddAssignment(DateTime date, Assignment assignment)
+        public void AddAssignment(Assignment assignment)
         {
-            foreach (var year in Years.Where(year => year.Date.Year == date.Year))
+            foreach (var year in Years.Where(year => year.Date.Year == assignment.Date.Year))
             {
-                year.AddAssignment(date, assignment);
+                year.AddAssignment(assignment.Date, assignment);
             }
         }
     }

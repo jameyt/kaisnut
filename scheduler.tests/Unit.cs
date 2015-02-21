@@ -50,20 +50,28 @@ namespace scheduler.tests
         public void AddAssignment()
         {
             var schedule = Schedule.CreateEmptyThreeYear();
-            var assignment = Assignment.Create();
+
+            var employee = Employee.Create(
+              "Joe",
+              "Smith",
+              DateTime.Now,
+              Contact.Create(
+                  "555-555-5555",
+                  "joe.smith@google.com",
+                  "123 S Main St Tulsa OK 74107"
+                  ));
+
+            var assignment = Assignment.Create(Role.First, 
+                employee,
+                new DateTime(2015,3,1));
             assignment.Role = Role.First;
-            var employee = Employee.Create("Joe", "Smith", DateTime.Now);
-            {
-                Contact = Contact.Create(),
-                First = "Joe",
-                Last = "Smith"
-            };
+          
             var date = DateTime.Now.AddDays(17);
             employee.Contact.Phone = "555-555-5555";
             employee.Contact.Email = "joe.smith@google.com";
             employee.Contact.Address = "123 S Main St Tulsa OK 74107";
             assignment.Employee = employee;
-            schedule.AddAssignment(date, assignment);
+            schedule.AddAssignment( assignment);
 
             Assert.AreEqual(1,schedule.Years[1].Months[2].Days[9].Assignments.Count);
         }

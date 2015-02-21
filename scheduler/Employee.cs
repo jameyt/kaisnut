@@ -47,7 +47,7 @@ namespace scheduler
                 First = firstName,
                 Last = lastName,
                 Start = start,
-                Contact = Contact.Create(
+                Contact = scheduler.Contact.Create(
                                                         phone,
                                                         email,
                                                         address)
@@ -55,11 +55,24 @@ namespace scheduler
             return employee;
         }
 
+        public static Employee Create(string firstName, string lastName, DateTime start, Contact contact)
+        {
+            var employee = new Employee
+            {
+                First = firstName,
+                Last = lastName,
+                Start = start,
+                Contact = contact
+            };
+            return employee;
+        }
+
+
         public static Employee CreateEmpty()
         {
             return new Employee
             {
-                Contact = Contact.CreateEmpty,
+                Contact = scheduler.Contact.CreateEmpty(),
                 First = string.Empty,
                 Last = string.Empty,
                 Start = DateTime.MinValue

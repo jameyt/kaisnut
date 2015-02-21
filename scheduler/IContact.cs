@@ -8,5 +8,9 @@ namespace scheduler
 {
   public  interface IContact
     {
+       string Phone { get; set; }
+       string Email { get; set; }
+       string Address { get; set; }
+      
     }
 }

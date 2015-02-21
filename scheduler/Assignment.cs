@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace scheduler
 {
-    public class Assignment
+    public class Assignment:IAssignment
     {
         public Role Role { get; set; }
         public Employee Employee { get; set; }

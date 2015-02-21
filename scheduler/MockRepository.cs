@@ -30,7 +30,7 @@ namespace scheduler
             {
                 Assignment.Create(
                 Role.First, 
-                Employee.Create(),
+                Employee.Create("Joe","Smith", DateTime.Now,"555-555-5555","joe.smith@yahoo.com", "123 S Main St Tulsa OK 74107"),
                 new DateTime(2015,3,1)
                 )
             };

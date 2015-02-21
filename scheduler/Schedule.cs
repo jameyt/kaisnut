@@ -3,45 +3,64 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using scheduler.data;
 
 namespace scheduler
 {
     public class Schedule
     {
+        private IRepository repo;
+
         public Day CurrentDay { get; set; }
         public Month CurrentMonth { get; set; }
         public Year CurrentYear { get; set; }
 
-        public List<Year> Years { get; set; } 
+        public List<Year> Years { get; set; }
 
-        private Schedule() 
+        private Schedule()
         {
-            
+
         }
 
-        public static Schedule Create()
+        public static Schedule Create(IRepository repository)
         {
-            return new Schedule();
+            return new Schedule()
+            {
+                repo = repository
+            };
         }
 
         public static Schedule CreateEmptyThreeYear()
         {
-            var schedule = new Schedule();
-            schedule.Years = new List<Year>();
-            schedule.Years.Add(Year.Create( DateTime.Now.AddYears(-1)));
-            schedule.Years.Add(Year.Create(DateTime.Now));
-            schedule.Years.Add(Year.Create(DateTime.Now.AddYears(1)));
+            var schedule = new Schedule
+            {
+                Years = new List<Year>
+                {
+                    Year.Create(DateTime.Now.AddYears(-1)),
+                    Year.Create(DateTime.Now),
+                    Year.Create(DateTime.Now.AddYears(1))
+                }
+            };
             return schedule;
         }
 
-        public void AddAssignment(DateTime date,Assignment assignment)
+        public static Schedule CreateEmptyThisYear()
         {
-            foreach (var year in Years)
+            var schedule = new Schedule
             {
-                if (year.Date.Year == date.Year)
+                Years = new List<Year>
                 {
-                    year.AddAssignment(date,assignment);
-                }
+                    Year.Create(DateTime.Now)
+                 }
+            };
+            return schedule;
+        }
+
+        public void AddAssignment(DateTime date, Assignment assignment)
+        {
+            foreach (var year in Years.Where(year => year.Date.Year == date.Year))
+            {
+                year.AddAssignment(date, assignment);
             }
         }
     }

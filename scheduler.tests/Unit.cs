@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using scheduler.data;
 
 namespace scheduler.tests
 {
@@ -10,7 +11,8 @@ namespace scheduler.tests
         [TestMethod]
         public void CreateSchedule()
         {
-            var schedule = Schedule.Create();
+            var repo = LocalRepository.Create();
+            var schedule = Schedule.Create(repo);
         }
 
         [TestMethod]

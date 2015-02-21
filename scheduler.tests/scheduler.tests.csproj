@@ -55,9 +55,17 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\scheduler\scheduler.core\scheduler.core.csproj">
+      <Project>{945b1d3d-d6d9-4fb9-bfe5-7ba36b1e21be}</Project>
+      <Name>scheduler.core</Name>
+    </ProjectReference>
     <ProjectReference Include="..\scheduler\scheduler.csproj">
       <Project>{588a2d27-8656-4967-92a8-f4c94b3a22a1}</Project>
       <Name>scheduler</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\scheduler\scheduler.data\scheduler.data.csproj">
+      <Project>{bec1468f-9680-45e5-a840-b3d13dc69c9b}</Project>
+      <Name>scheduler.data</Name>
     </ProjectReference>
   </ItemGroup>
   <Choose>

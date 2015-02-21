@@ -7,6 +7,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "scheduler", "scheduler.cspr
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "scheduler.tests", "..\scheduler.tests\scheduler.tests.csproj", "{92647115-C275-4553-9F2D-453B84A74AA2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "scheduler.data", "scheduler.data\scheduler.data.csproj", "{BEC1468F-9680-45E5-A840-B3D13DC69C9B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "scheduler.core", "scheduler.core\scheduler.core.csproj", "{945B1D3D-D6D9-4FB9-BFE5-7BA36B1E21BE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +25,14 @@ Global
 		{92647115-C275-4553-9F2D-453B84A74AA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{92647115-C275-4553-9F2D-453B84A74AA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{92647115-C275-4553-9F2D-453B84A74AA2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BEC1468F-9680-45E5-A840-B3D13DC69C9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BEC1468F-9680-45E5-A840-B3D13DC69C9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BEC1468F-9680-45E5-A840-B3D13DC69C9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BEC1468F-9680-45E5-A840-B3D13DC69C9B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{945B1D3D-D6D9-4FB9-BFE5-7BA36B1E21BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{945B1D3D-D6D9-4FB9-BFE5-7BA36B1E21BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{945B1D3D-D6D9-4FB9-BFE5-7BA36B1E21BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{945B1D3D-D6D9-4FB9-BFE5-7BA36B1E21BE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

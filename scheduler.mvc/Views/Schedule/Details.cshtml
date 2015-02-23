@@ -14,8 +14,14 @@
                 @foreach (var day in week.Days)
                 {
                     <td style="border-style: solid;">
-                        @day.Date.ToShortDateString()
-                        @if (day.Assignments == null) { continue; }
+                        @if (day.Date != DateTime.MinValue)
+                        {
+                            @day.Date.ToShortDateString()
+                        }
+                        @if (day.Assignments == null)
+                        {
+                            continue;
+                        }
                         @foreach (var assignment in day.Assignments)
                         {
                             <div>

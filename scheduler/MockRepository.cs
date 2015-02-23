@@ -29,24 +29,24 @@ namespace scheduler
         {
             Employees = new List<IEmployee>();
 
-            var SA = Employee.Create("Shane", "Adams", DateTime.Now, "417-499-3116", "", "");
-            var StB = Employee.Create("Steve", "Boeger", DateTime.Now, "417-624-3192", "", "");
-            var SB = Employee.Create("Susie", "Boeger", DateTime.Now, "417-624-3192", "", "");
-            var RoB = Employee.Create("Robin", "Boyd", DateTime.Now, "417-624-2949", "", "");
-            var RB = Employee.Create("Rick", "Brown", DateTime.Now, "417-496-3793", "", "");
-            var CC = Employee.Create("Chris", "Crabtree", DateTime.Now, "417-830-6644", "", "");
-            var CE = Employee.Create("Cary", "Edwards", DateTime.Now, "417-619-5745", "", "");
-            var RE = Employee.Create("Ray", "Eisenmann", DateTime.Now, "417-425-7644", "", "");
-            var NF = Employee.Create("Nancy", "Fiscus", DateTime.Now, "417-781-4152", "", "");
-            var CG = Employee.Create("Chris", "Garde", DateTime.Now, "417-782-7869", "", "");
-            var JH = Employee.Create("John", "Howard", DateTime.Now, "417-317-0777", "", "");
-            var CH = Employee.Create("Cole", "Hughes", DateTime.Now, "417-728-4793", "", "");
-            var SM = Employee.Create("Shelly", "Mabe", DateTime.Now, "417-766-6916", "", "");
-            var EM = Employee.Create("Ed", "Messer", DateTime.Now, "417-381-6317", "", "");
-            var LS = Employee.Create("Leanna", "Swager", DateTime.Now, "417-358-4426", "", "");
-            var YS = Employee.Create("Yvonne", "Stanke", DateTime.Now, "417-862-9887", "", "");
-            var JT = Employee.Create("Jim", "Tyler", DateTime.Now, "417-206-8005", "", "");
-            var CW = Employee.Create("Curt", "Williams", DateTime.Now, "417-833-9007", "", "");
+            var SA = Employee.Create("Shane", "Adams", DateTime.Now, "417-499-3116", "", ""); Employees.Add(SA);
+            var StB = Employee.Create("Steve", "Boeger", DateTime.Now, "417-624-3192", "", ""); Employees.Add(StB);
+            var SB = Employee.Create("Susie", "Boeger", DateTime.Now, "417-624-3192", "", ""); Employees.Add(SB);
+            var RoB = Employee.Create("Robin", "Boyd", DateTime.Now, "417-624-2949", "", ""); Employees.Add(RoB);
+            var RB = Employee.Create("Rick", "Brown", DateTime.Now, "417-496-3793", "", ""); Employees.Add(RB);
+            var CC = Employee.Create("Chris", "Crabtree", DateTime.Now, "417-830-6644", "", ""); Employees.Add(CC);
+            var CE = Employee.Create("Cary", "Edwards", DateTime.Now, "417-619-5745", "", ""); Employees.Add(CE);
+            var RE = Employee.Create("Ray", "Eisenmann", DateTime.Now, "417-425-7644", "", ""); Employees.Add(RE);
+            var NF = Employee.Create("Nancy", "Fiscus", DateTime.Now, "417-781-4152", "", ""); Employees.Add(NF);
+            var CG = Employee.Create("Chris", "Garde", DateTime.Now, "417-782-7869", "", ""); Employees.Add(CG);
+            var JH = Employee.Create("John", "Howard", DateTime.Now, "417-317-0777", "", ""); Employees.Add(JH);
+            var CH = Employee.Create("Cole", "Hughes", DateTime.Now, "417-728-4793", "", ""); Employees.Add(CH);
+            var SM = Employee.Create("Shelly", "Mabe", DateTime.Now, "417-766-6916", "", ""); Employees.Add(SM);
+            var EM = Employee.Create("Ed", "Messer", DateTime.Now, "417-381-6317", "", ""); Employees.Add(EM);
+            var LS = Employee.Create("Leanna", "Swager", DateTime.Now, "417-358-4426", "", ""); Employees.Add(LS);
+            var YS = Employee.Create("Yvonne", "Stanke", DateTime.Now, "417-862-9887", "", ""); Employees.Add(YS);
+            var JT = Employee.Create("Jim", "Tyler", DateTime.Now, "417-206-8005", "", ""); Employees.Add(JT);
+            var CW = Employee.Create("Curt", "Williams", DateTime.Now, "417-833-9007", "", ""); Employees.Add(CW);
 
             Assignments = new List<IAssignment>
             {

@@ -9,8 +9,8 @@ namespace scheduler
 {
     public interface ISchedule
     {
-
         List<IYear> Years { get; set; }
+        List<IEmployee> Employees { get; set; }
 
         void AddAssignment(IAssignment assignment);
 

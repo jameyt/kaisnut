@@ -11,6 +11,7 @@ namespace scheduler
     {
         public string First { get; set; }
         public string Last { get; set; }
+        public string Initials { get; set; }
 
         public DateTime Start { get; set; }
 
@@ -40,12 +41,13 @@ namespace scheduler
 
         private Employee() { }
 
-        public static Employee Create(string firstName, string lastName, DateTime start, string phone, string email, string address)
+        public static Employee Create(string firstName, string lastName, string initials,DateTime start, string phone, string email, string address)
         {
             var employee = new Employee
             {
                 First = firstName,
                 Last = lastName,
+                Initials = initials,
                 Start = start,
                 Contact = scheduler.Contact.Create(
                                                         phone,

@@ -7,7 +7,7 @@
 <h2>@Model.Name</h2>
 
 <div>
-    <table style="border-style: solid;">
+    <table style="border-style: solid;padding:25px">
         @foreach (var week in Model.Weeks)
         {
             <tr style="border-style: solid;">
@@ -26,7 +26,8 @@
                         {
                             <div>
                                 &nbsp;&nbsp;&nbsp;&nbsp;
-                                @assignment.Employee.First @assignment.Employee.Last - @assignment.Role;
+                                @assignment.Employee.Initials - @assignment.Role;
+                                @*@assignment.Employee.First @assignment.Employee.Last - @assignment.Role;*@
                             </div>
                         }
                     </td>

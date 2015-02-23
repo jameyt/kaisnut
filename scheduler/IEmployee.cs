@@ -10,6 +10,7 @@ namespace scheduler
     {
       string First { get; set; }
       string Last { get; set; }
+      string Initials { get; set; }
 
       DateTime Start { get; set; }
 

@@ -4,26 +4,166 @@
     ViewBag.Title = "Month";
 }
 
-<h2>Month</h2>
+<h2>@Model.Name</h2>
 
 <div>
-    <table style="width: 80%">
-        <tr>
-    @foreach (var day in Model.Days)
-    {
-
-        <td>
-            @day.Date
-            @foreach (var assignment in day.Assignments)
-            {
-                @(assignment.Employee.First + " " + assignment.Employee.Last + " " + assignment.Role);
-            }
-        </td>
-        if (day.Date.DayOfWeek != DayOfWeek.Saturday){continue;}
-        @*</tr ><tr >*@
-    }
-        </tr>
-
-</table>
-
+    <table style="border-style: solid;">
+        @foreach (var week in Model.Weeks)
+        {
+            <tr style="border-style: solid;">
+                @foreach (var day in week.Days)
+                {
+                    <td style="border-style: solid;">
+                        @day.Date.ToShortDateString()
+                        @if (day.Assignments == null) { continue; }
+                        @foreach (var assignment in day.Assignments)
+                        {
+                            <div>
+                                &nbsp;&nbsp;&nbsp;&nbsp;
+                                @assignment.Employee.First @assignment.Employee.Last - @assignment.Role;
+                            </div>
+                        }
+                    </td>
+                }
+            </tr>
+        }
+    </table>
 </div>
+
+
+
+@*<div>
+        <table>
+            <tr>
+                <td>
+                    <dl>
+                        @foreach (var day in Model.Days.Where(day => day.Date.DayOfWeek == DayOfWeek.Sunday))
+                        {
+                            <dt>@day.Date.ToShortDateString()</dt>
+
+                            foreach (var assignment in day.Assignments)
+                            {
+                                <dd>&nbsp;&nbsp;&nbsp;&nbsp;
+                                    @assignment.Employee.First @assignment.Employee.Last - @assignment.Role</dd>
+                            }
+                        }
+                    </dl>
+                </td>
+                <td>
+                    <dl>
+                        @foreach (var day in Model.Days)
+                        {
+                            if (day.Date.DayOfWeek == DayOfWeek.Monday)
+                            {
+                                <dt>@day.Date.ToShortDateString()</dt>
+
+                                foreach (var assignment in day.Assignments)
+                                {
+                                    <dd>&nbsp;&nbsp;&nbsp;&nbsp; @assignment.Employee.First @assignment.Employee.Last - @assignment.Role</dd>
+                                }
+                            }
+                        }
+                    </dl>
+                </td>
+                <td>
+                    <dl>
+                        @foreach (var day in Model.Days)
+                        {
+                            if (day.Date.DayOfWeek == DayOfWeek.Tuesday)
+                            {
+                                <dt>@day.Date.ToShortDateString()</dt>
+
+                                foreach (var assignment in day.Assignments)
+                                {
+                                    <dd>&nbsp;&nbsp;&nbsp;&nbsp; @assignment.Employee.First @assignment.Employee.Last - @assignment.Role</dd>
+                                }
+                            }
+                        }
+                    </dl>
+                </td>
+                <td>
+                    <dl>
+                        @foreach (var day in Model.Days)
+                        {
+                            if (day.Date.DayOfWeek == DayOfWeek.Wednesday)
+                            {
+                                <dt>@day.Date.ToShortDateString()</dt>
+
+                                foreach (var assignment in day.Assignments)
+                                {
+                                    <dd>&nbsp;&nbsp;&nbsp;&nbsp; @assignment.Employee.First @assignment.Employee.Last - @assignment.Role</dd>
+                                }
+                            }
+                        }
+                    </dl>
+                </td>
+                <td>
+                    <dl>
+                        @foreach (var day in Model.Days)
+                        {
+                            if (day.Date.DayOfWeek == DayOfWeek.Thursday)
+                            {
+                                <dt>@day.Date.ToShortDateString()</dt>
+
+                                foreach (var assignment in day.Assignments)
+                                {
+                                    <dd>&nbsp;&nbsp;&nbsp;&nbsp; @assignment.Employee.First @assignment.Employee.Last - @assignment.Role</dd>
+                                }
+                            }
+                        }
+                    </dl>
+                </td>
+                <td>
+                    <dl>
+                        @foreach (var day in Model.Days)
+                        {
+                            if (day.Date.DayOfWeek == DayOfWeek.Friday)
+                            {
+                                <dt>@day.Date.ToShortDateString()</dt>
+
+                                foreach (var assignment in day.Assignments)
+                                {
+                                    <dd>&nbsp;&nbsp;&nbsp;&nbsp; @assignment.Employee.First @assignment.Employee.Last - @assignment.Role</dd>
+                                }
+                            }
+                        }
+                    </dl>
+                </td>
+                <td>
+                    <dl>
+                        @foreach (var day in Model.Days)
+                        {
+                            if (day.Date.DayOfWeek == DayOfWeek.Saturday)
+                            {
+                                <dt>@day.Date.ToShortDateString()</dt>
+
+                                foreach (var assignment in day.Assignments)
+                                {
+                                    <dd>&nbsp;&nbsp;&nbsp;&nbsp; @assignment.Employee.First @assignment.Employee.Last - @assignment.Role</dd>
+                                }
+                            }
+                        }
+                    </dl>
+                </td>
+            </tr>
+        </table>
+        @*<table style="width: 80%">
+                    <tr>
+                @foreach (var day in Model.Days)
+                {
+
+                    <td>
+                        @day.Date
+                        @foreach (var assignment in day.Assignments)
+                        {
+                            @(assignment.Employee.First + " " + assignment.Employee.Last + " " + assignment.Role);
+                        }
+                    </td>
+                    if (day.Date.DayOfWeek != DayOfWeek.Saturday){continue;}
+                    @*</tr ><tr >
+                }
+                    </tr>
+
+            </table>
+
+    </div>*@

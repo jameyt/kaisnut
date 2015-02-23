@@ -30,6 +30,11 @@ namespace scheduler
            };
        }
 
+       public static Day CreateEmpty()
+       {
+           return new Day();
+       }
+
        public List<IAssignment> GetAssignmentsByEmployee(IEmployee employee   )
        {
            return (from assignment in Assignments 

@@ -10,12 +10,14 @@ namespace scheduler
     {
        DateTime Date { get; set; }
        List<IDay> Days { get; set; }
+       string Name { get; set; }
+       List<IWeek> Weeks { get; set; }
 
        void AddAssignment(DateTime date, IAssignment assignment);
        List<IAssignment> GetAssignments();
        List<IAssignment> GetAssignments(IEmployee employee);
        List<IAssignment> GetAssignments(DateTime date);
        List<IAssignment> GetAssignments(IEmployee employee, DateTime date);
-       
+       void SetName(int id);
     }
 }

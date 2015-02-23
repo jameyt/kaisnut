@@ -14,11 +14,12 @@ namespace scheduler.mvc.Controllers
             return View();
         }
 
-        public ActionResult Month(int id    )
+        public ActionResult Month(int id)
         {
             var mockRepo = MockRepository.Create();
             var schedule = Schedule.Create(mockRepo);
 
+            schedule.Years[1].Months[id].SetName(id);
             return View(schedule.Years[1].Months[id]);
         }
     }

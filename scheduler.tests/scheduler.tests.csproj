@@ -60,6 +60,14 @@
       <Project>{588a2d27-8656-4967-92a8-f4c94b3a22a1}</Project>
       <Name>scheduler</Name>
     </ProjectReference>
+    <ProjectReference Include="..\utilities.data\utilities.data.csproj">
+      <Project>{d8d8ef1b-a4d8-4c7b-9797-02189c33b982}</Project>
+      <Name>utilities.data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\utilities\utilities.csproj">
+      <Project>{65a04c4b-0cda-43f3-b413-e78b5a9d929b}</Project>
+      <Name>utilities</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="local.mdf">

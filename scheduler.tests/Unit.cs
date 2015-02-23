@@ -12,14 +12,22 @@ namespace scheduler.tests
         [TestMethod]
         public void CreateSchedule()
         {
-            var cs = @"Data Source=(LocalDB)\v11.0;
-                          AttachDbFilename=C:\Users\tyler-eg\Source\Repos\kaisnut\scheduler.tests\local.mdf;
-                          Integrated Security=True;
-                          Connect Timeout=30;";
-            var cn = new SqlConnection(cs);
-            cn.Open();
-            var repo = Repository.Create(cn);
+            var repo = MockRepository.Create();
+            repo.Seed();
             var schedule = Schedule.Create(repo);
+        }
+
+        [TestMethod]
+        public void MockFillsMarchSuccessfully()
+        {
+            var repo = MockRepository.Create();
+            repo.Seed();
+            var schedule = Schedule.Create(repo);
+
+            foreach (var day in schedule.Years[1].Months[2].Days)
+            {
+                Assert.AreEqual(18,day.Assignments.Count);
+            }
         }
 
         [TestMethod]
@@ -61,10 +69,10 @@ namespace scheduler.tests
                   "123 S Main St Tulsa OK 74107"
                   ));
 
-            var assignment = Assignment.Create(Role.First,
+            var assignment = Assignment.Create(Role.PM,
                 employee,
                 new DateTime(2015, 3, 1));
-            assignment.Role = Role.First;
+            assignment.Role = Role.PM;
 
             employee.Contact.Phone = "555-555-5555";
             employee.Contact.Email = "joe.smith@google.com";

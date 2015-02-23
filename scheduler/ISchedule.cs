@@ -12,7 +12,10 @@ namespace scheduler
 
         List<IYear> Years { get; set; }
 
-        void AddAssignment(Assignment assignment);
+        void AddAssignment(IAssignment assignment);
 
+        List<IAssignment> GetAssignment(DateTime date);
+        void InitializeCurrentYear();
+        void InitializeThreeYear();
     }
 }

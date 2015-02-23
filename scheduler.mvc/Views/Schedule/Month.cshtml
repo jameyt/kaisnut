@@ -1,0 +1,29 @@
+﻿@model scheduler.IMonth
+
+@{
+    ViewBag.Title = "Month";
+}
+
+<h2>Month</h2>
+
+<div>
+    <table style="width: 80%">
+        <tr>
+    @foreach (var day in Model.Days)
+    {
+
+        <td>
+            @day.Date
+            @foreach (var assignment in day.Assignments)
+            {
+                @(assignment.Employee.First + " " + assignment.Employee.Last + " " + assignment.Role);
+            }
+        </td>
+        if (day.Date.DayOfWeek != DayOfWeek.Saturday){continue;}
+        @*</tr ><tr >*@
+    }
+        </tr>
+
+</table>
+
+</div>

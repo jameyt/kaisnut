@@ -17,11 +17,11 @@
                     var width = string.Empty;
                     if (day.Date.DayOfWeek == DayOfWeek.Sunday || day.Date.DayOfWeek == DayOfWeek.Saturday)
                     {
-                        width = "col-md-1";
+                        width = "col-md-1  col-xs-12";
                     }
                     else
                     {
-                        width = "col-md-2";
+                        width = "col-md-2 col-xs-12";
                     }
                     <div class=@width>
                         @if (day.Date != DateTime.MinValue)

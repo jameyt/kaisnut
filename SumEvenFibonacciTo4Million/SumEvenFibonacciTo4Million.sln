@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SumEvenFibonacciTo4Million", "SumEvenFibonacciTo4Million.csproj", "{C010CB03-9615-4F6E-8710-AE3113F3BB04}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SumEvenFibonacciTo4Million.Tests", "..\SumEvenFibonacciTo4Million.Tests\SumEvenFibonacciTo4Million.Tests.csproj", "{335DE6DB-793D-43DE-9556-F51CEED5F8A3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C010CB03-9615-4F6E-8710-AE3113F3BB04}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C010CB03-9615-4F6E-8710-AE3113F3BB04}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C010CB03-9615-4F6E-8710-AE3113F3BB04}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C010CB03-9615-4F6E-8710-AE3113F3BB04}.Release|Any CPU.Build.0 = Release|Any CPU
+		{335DE6DB-793D-43DE-9556-F51CEED5F8A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{335DE6DB-793D-43DE-9556-F51CEED5F8A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{335DE6DB-793D-43DE-9556-F51CEED5F8A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{335DE6DB-793D-43DE-9556-F51CEED5F8A3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

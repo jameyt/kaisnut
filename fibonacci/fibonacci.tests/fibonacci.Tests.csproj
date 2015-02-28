@@ -54,7 +54,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\SumEvenFibonacciTo4Million\fibonacci.csproj">
+    <ProjectReference Include="..\fibonacci\fibonacci.csproj">
       <Project>{c010cb03-9615-4f6e-8710-ae3113f3bb04}</Project>
       <Name>fibonacci</Name>
     </ProjectReference>

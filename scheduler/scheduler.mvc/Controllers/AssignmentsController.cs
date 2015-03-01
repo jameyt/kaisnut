@@ -18,7 +18,7 @@ namespace scheduler.mvc.Controllers
             {
                 assignments = assignments.Where(assignment => assignment.Date.Month == month.Value).ToList();
             }
-            if (role != null)
+            if (role != null && role != Role.Any)
             {
                 assignments = assignments.Where(assignment => assignment.Role == role.Value).ToList();
             }

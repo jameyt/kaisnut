@@ -8,26 +8,30 @@
 
 <div>
 
-    @foreach (var week in Model.Weeks)
-    {
+    @*@foreach (var week in Model.Weeks)*@
+    @*@foreach (var week in Model.Days)
+    {*@
         <div class="row">
             <div class="col-md-12">
-                @foreach (var day in week.Days)
+                @foreach (var day in Model.Days)
                 {
-                    var width = string.Empty;
-                    if (day.Date.DayOfWeek == DayOfWeek.Sunday || day.Date.DayOfWeek == DayOfWeek.Saturday)
-                    {
-                        width = "col-md-1  col-xs-12";
-                    }
-                    else
-                    {
-                        width = "col-md-2 col-xs-12";
-                    }
-                    <div class=@width>
+                    //var width = 960 / 7.0 + "px";
+                    const string width = "col-md-4  col-xs-12";
+                    //if (day.Date.DayOfWeek == DayOfWeek.Sunday || day.Date.DayOfWeek == DayOfWeek.Saturday)
+                    //{
+                    //    width = "col-md-1  col-xs-12";
+                    //}
+                    //else
+                    //{
+                    //    width = "col-md-2 col-xs-12";
+                    //}
+                    <div class="@width">
                         @if (day.Date != DateTime.MinValue)
                         {
-                            @day.Date.ToShortDateString()
+                            @day.Date.ToLongDateString()
                         }
+                        <br/>
+                        <br />
                         @if (day.Assignments == null)
                         {
                             continue;
@@ -36,152 +40,16 @@
                         {
                             <div>
                                 &nbsp;&nbsp;&nbsp;&nbsp;
-                                @assignment.Employee.Initials - @assignment.Role
+                                @assignment.FormattedRole: @assignment.Employee.First @assignment.Employee.Last
+                                @*@assignment.Employee.Initials - @assignment.Role*@
                                 @*@assignment.Employee.First @assignment.Employee.Last - @assignment.Role;*@
                             </div>
                         }
+                        <br />
                     </div>
                 }
             </div>
         </div>
-    }
+    @*}*@
 
 </div>
-
-
-
-@*<div>
-        <table>
-            <tr>
-                <td>
-                    <dl>
-                        @foreach (var day in Model.Days.Where(day => day.Date.DayOfWeek == DayOfWeek.Sunday))
-                        {
-                            <dt>@day.Date.ToShortDateString()</dt>
-
-                            foreach (var assignment in day.Assignments)
-                            {
-                                <dd>&nbsp;&nbsp;&nbsp;&nbsp;
-                                    @assignment.Employee.First @assignment.Employee.Last - @assignment.Role</dd>
-                            }
-                        }
-                    </dl>
-                </td>
-                <td>
-                    <dl>
-                        @foreach (var day in Model.Days)
-                        {
-                            if (day.Date.DayOfWeek == DayOfWeek.Monday)
-                            {
-                                <dt>@day.Date.ToShortDateString()</dt>
-
-                                foreach (var assignment in day.Assignments)
-                                {
-                                    <dd>&nbsp;&nbsp;&nbsp;&nbsp; @assignment.Employee.First @assignment.Employee.Last - @assignment.Role</dd>
-                                }
-                            }
-                        }
-                    </dl>
-                </td>
-                <td>
-                    <dl>
-                        @foreach (var day in Model.Days)
-                        {
-                            if (day.Date.DayOfWeek == DayOfWeek.Tuesday)
-                            {
-                                <dt>@day.Date.ToShortDateString()</dt>
-
-                                foreach (var assignment in day.Assignments)
-                                {
-                                    <dd>&nbsp;&nbsp;&nbsp;&nbsp; @assignment.Employee.First @assignment.Employee.Last - @assignment.Role</dd>
-                                }
-                            }
-                        }
-                    </dl>
-                </td>
-                <td>
-                    <dl>
-                        @foreach (var day in Model.Days)
-                        {
-                            if (day.Date.DayOfWeek == DayOfWeek.Wednesday)
-                            {
-                                <dt>@day.Date.ToShortDateString()</dt>
-
-                                foreach (var assignment in day.Assignments)
-                                {
-                                    <dd>&nbsp;&nbsp;&nbsp;&nbsp; @assignment.Employee.First @assignment.Employee.Last - @assignment.Role</dd>
-                                }
-                            }
-                        }
-                    </dl>
-                </td>
-                <td>
-                    <dl>
-                        @foreach (var day in Model.Days)
-                        {
-                            if (day.Date.DayOfWeek == DayOfWeek.Thursday)
-                            {
-                                <dt>@day.Date.ToShortDateString()</dt>
-
-                                foreach (var assignment in day.Assignments)
-                                {
-                                    <dd>&nbsp;&nbsp;&nbsp;&nbsp; @assignment.Employee.First @assignment.Employee.Last - @assignment.Role</dd>
-                                }
-                            }
-                        }
-                    </dl>
-                </td>
-                <td>
-                    <dl>
-                        @foreach (var day in Model.Days)
-                        {
-                            if (day.Date.DayOfWeek == DayOfWeek.Friday)
-                            {
-                                <dt>@day.Date.ToShortDateString()</dt>
-
-                                foreach (var assignment in day.Assignments)
-                                {
-                                    <dd>&nbsp;&nbsp;&nbsp;&nbsp; @assignment.Employee.First @assignment.Employee.Last - @assignment.Role</dd>
-                                }
-                            }
-                        }
-                    </dl>
-                </td>
-                <td>
-                    <dl>
-                        @foreach (var day in Model.Days)
-                        {
-                            if (day.Date.DayOfWeek == DayOfWeek.Saturday)
-                            {
-                                <dt>@day.Date.ToShortDateString()</dt>
-
-                                foreach (var assignment in day.Assignments)
-                                {
-                                    <dd>&nbsp;&nbsp;&nbsp;&nbsp; @assignment.Employee.First @assignment.Employee.Last - @assignment.Role</dd>
-                                }
-                            }
-                        }
-                    </dl>
-                </td>
-            </tr>
-        </table>
-        @*<table style="width: 80%">
-                    <tr>
-                @foreach (var day in Model.Days)
-                {
-
-                    <td>
-                        @day.Date
-                        @foreach (var assignment in day.Assignments)
-                        {
-                            @(assignment.Employee.First + " " + assignment.Employee.Last + " " + assignment.Role);
-                        }
-                    </td>
-                    if (day.Date.DayOfWeek != DayOfWeek.Saturday){continue;}
-                    @*</tr ><tr >
-                }
-                    </tr>
-
-            </table>
-
-    </div>*@

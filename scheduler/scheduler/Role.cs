@@ -11,7 +11,7 @@ namespace scheduler
         Any,
         SevenToOne,
         SevenToThree,
-        SevenToFive, 
+        SevenToFive,
         SevenToTen,
         Num01,
         Num02,

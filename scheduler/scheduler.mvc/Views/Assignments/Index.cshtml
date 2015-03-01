@@ -2,21 +2,19 @@
 @model IEnumerable<scheduler.IAssignment>
 
 @{
-    ViewBag.Title = "View";
+    ViewBag.Title = "Assignments";
 }
 
-<h2>View</h2>
+<h2>Assignments</h2>
 
-<div>
-    Filters
-</div>
-
-<p>
+@*<p>
     @Html.ActionLink("Create New", "Create")
-</p>
+</p>*@
 <table class="table">
     <tr>
-        <th></th>
+        <th>
+            @Html.ActionLink("Create New", "Create")
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.Role)
         </th>
@@ -120,7 +118,7 @@
                 @Html.DisplayFor(modelItem => item.Role)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Date)
+                @Html.DisplayFor(modelItem => item.ShortDate)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Employee.First)

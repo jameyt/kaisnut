@@ -8,6 +8,7 @@ namespace scheduler
 {
     public enum Role
     {
+        Any,
         SevenToOne,
         SevenToThree,
         SevenToFive, 

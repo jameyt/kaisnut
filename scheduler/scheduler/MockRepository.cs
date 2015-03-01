@@ -29,35 +29,35 @@ namespace scheduler
         {
             Employees = new List<IEmployee>();
 
-            var SA = Employee.Create("Shane", "Adams", "SA",DateTime.Now, "417-499-3116", "", ""); Employees.Add(SA);
-            var StB = Employee.Create("Steve", "Boeger", "StB",DateTime.Now, "417-624-3192", "", ""); Employees.Add(StB);
-            var SB = Employee.Create("Susie", "Boeger", "SB",DateTime.Now, "417-624-3192", "", ""); Employees.Add(SB);
-            var RoB = Employee.Create("Robin", "Boyd", "RoB",DateTime.Now, "417-624-2949", "", ""); Employees.Add(RoB);
-            var RB = Employee.Create("Rick", "Brown", "RB",DateTime.Now, "417-496-3793", "", ""); Employees.Add(RB);
-            var CC = Employee.Create("Chris", "Crabtree", "CC",DateTime.Now, "417-830-6644", "", ""); Employees.Add(CC);
-            var CE = Employee.Create("Cary", "Edwards", "CE",DateTime.Now, "417-619-5745", "", ""); Employees.Add(CE);
-            var RE = Employee.Create("Ray", "Eisenmann", "RE",DateTime.Now, "417-425-7644", "", ""); Employees.Add(RE);
-            var NF = Employee.Create("Nancy", "Fiscus", "NF",DateTime.Now, "417-781-4152", "", ""); Employees.Add(NF);
-            var CG = Employee.Create("Chris", "Garde", "CG",DateTime.Now, "417-782-7869", "", ""); Employees.Add(CG);
-            var JH = Employee.Create("John", "Howard", "JH",DateTime.Now, "417-317-0777", "", ""); Employees.Add(JH);
-            var CH = Employee.Create("Cole", "Hughes", "CH",DateTime.Now, "417-728-4793", "", ""); Employees.Add(CH);
-            var SM = Employee.Create("Shelly", "Mabe", "SM",DateTime.Now, "417-766-6916", "", ""); Employees.Add(SM);
-            var EM = Employee.Create("Ed", "Messer", "EM",DateTime.Now, "417-381-6317", "", ""); Employees.Add(EM);
-            var LS = Employee.Create("Leanna", "Swager", "LS",DateTime.Now, "417-358-4426", "", ""); Employees.Add(LS);
-            var YS = Employee.Create("Yvonne", "Stanke","YS", DateTime.Now, "417-862-9887", "", ""); Employees.Add(YS);
-            var JT = Employee.Create("Jim", "Tyler", "JT",DateTime.Now, "417-206-8005", "", ""); Employees.Add(JT);
-            var CW = Employee.Create("Curt", "Williams", "CW",DateTime.Now, "417-833-9007", "", ""); Employees.Add(CW);
+            var SA = Employee.Create("Shane", "Adams", "SA", DateTime.Now, "417-499-3116", "", ""); Employees.Add(SA);
+            var StB = Employee.Create("Steve", "Boeger", "StB", DateTime.Now, "417-624-3192", "", ""); Employees.Add(StB);
+            var SB = Employee.Create("Susie", "Boeger", "SB", DateTime.Now, "417-624-3192", "", ""); Employees.Add(SB);
+            var RoB = Employee.Create("Robin", "Boyd", "RoB", DateTime.Now, "417-624-2949", "", ""); Employees.Add(RoB);
+            var RB = Employee.Create("Rick", "Brown", "RB", DateTime.Now, "417-496-3793", "", ""); Employees.Add(RB);
+            var CC = Employee.Create("Chris", "Crabtree", "CC", DateTime.Now, "417-830-6644", "", ""); Employees.Add(CC);
+            var CE = Employee.Create("Cary", "Edwards", "CE", DateTime.Now, "417-619-5745", "", ""); Employees.Add(CE);
+            var RE = Employee.Create("Ray", "Eisenmann", "RE", DateTime.Now, "417-425-7644", "", ""); Employees.Add(RE);
+            var NF = Employee.Create("Nancy", "Fiscus", "NF", DateTime.Now, "417-781-4152", "", ""); Employees.Add(NF);
+            var CG = Employee.Create("Chris", "Garde", "CG", DateTime.Now, "417-782-7869", "", ""); Employees.Add(CG);
+            var JH = Employee.Create("John", "Howard", "JH", DateTime.Now, "417-317-0777", "", ""); Employees.Add(JH);
+            var CH = Employee.Create("Cole", "Hughes", "CH", DateTime.Now, "417-728-4793", "", ""); Employees.Add(CH);
+            var SM = Employee.Create("Shelly", "Mabe", "SM", DateTime.Now, "417-766-6916", "", ""); Employees.Add(SM);
+            var EM = Employee.Create("Ed", "Messer", "EM", DateTime.Now, "417-381-6317", "", ""); Employees.Add(EM);
+            var LS = Employee.Create("Leanna", "Swager", "LS", DateTime.Now, "417-358-4426", "", ""); Employees.Add(LS);
+            var YS = Employee.Create("Yvonne", "Stanke", "YS", DateTime.Now, "417-862-9887", "", ""); Employees.Add(YS);
+            var JT = Employee.Create("Jim", "Tyler", "JT", DateTime.Now, "417-206-8005", "", ""); Employees.Add(JT);
+            var CW = Employee.Create("Curt", "Williams", "CW", DateTime.Now, "417-833-9007", "", ""); Employees.Add(CW);
 
             Assignments = new List<IAssignment>
             {
                 //March 1st
-                Assignment.Create(Role.Off, SA,new DateTime(2015,3,1)),
+                Assignment.Create(Role.PM, SA,new DateTime(2015,3,1)),
                 Assignment.Create(Role.Off, StB,new DateTime(2015,3,1)),
                 Assignment.Create(Role.Off, SB,new DateTime(2015,3,1)),
-                Assignment.Create(Role.Off, RoB,new DateTime(2015,3,1)),
+                Assignment.Create(Role.CV, RoB,new DateTime(2015,3,1)),
                 Assignment.Create(Role.Off, RB,new DateTime(2015,3,1)),
                 Assignment.Create(Role.Off, CC,new DateTime(2015,3,1)),
-                Assignment.Create(Role.Off, CE,new DateTime(2015,3,1)),
+                Assignment.Create(Role.AM, CE,new DateTime(2015,3,1)),
                 Assignment.Create(Role.Off, RE,new DateTime(2015,3,1)),
                 Assignment.Create(Role.Off, NF,new DateTime(2015,3,1)),
                 Assignment.Create(Role.Off, CG,new DateTime(2015,3,1)),
@@ -166,26 +166,26 @@ namespace scheduler
                 Assignment.Create(Role.Off, CW,new DateTime(2015,3,6)),
                  //March 7th
                 Assignment.Create(Role.Off, SA,new DateTime(2015,3,7)),
-                Assignment.Create(Role.Off, StB,new DateTime(2015,3,7)),
+                Assignment.Create(Role.CV, StB,new DateTime(2015,3,7)),
                 Assignment.Create(Role.Off, SB,new DateTime(2015,3,7)),
                 Assignment.Create(Role.Off, RoB,new DateTime(2015,3,7)),
                 Assignment.Create(Role.Off, RB,new DateTime(2015,3,7)),
                 Assignment.Create(Role.Off, CC,new DateTime(2015,3,7)),
                 Assignment.Create(Role.Off, CE,new DateTime(2015,3,7)),
                 Assignment.Create(Role.Off, RE,new DateTime(2015,3,7)),
-                Assignment.Create(Role.Off, NF,new DateTime(2015,3,7)),
+                Assignment.Create(Role.SevenToThree, NF,new DateTime(2015,3,7)),
                 Assignment.Create(Role.Off, CG,new DateTime(2015,3,7)),
-                Assignment.Create(Role.Off, JH,new DateTime(2015,3,7)),
+                Assignment.Create(Role.PM, JH,new DateTime(2015,3,7)),
                 Assignment.Create(Role.Off, CH,new DateTime(2015,3,7)),
                 Assignment.Create(Role.Off, SM,new DateTime(2015,3,7)),
                 Assignment.Create(Role.Off, EM,new DateTime(2015,3,7)),
                 Assignment.Create(Role.Off, LS,new DateTime(2015,3,7)),
-                Assignment.Create(Role.Off, YS,new DateTime(2015,3,7)),
+                Assignment.Create(Role.AM, YS,new DateTime(2015,3,7)),
                 Assignment.Create(Role.Off, JT,new DateTime(2015,3,7)),
                 Assignment.Create(Role.Off, CW,new DateTime(2015,3,7)),
                  //March 8th
                 Assignment.Create(Role.Off, SA,new DateTime(2015,3,8)),
-                Assignment.Create(Role.Off, StB,new DateTime(2015,3,8)),
+                Assignment.Create(Role.CV, StB,new DateTime(2015,3,8)),
                 Assignment.Create(Role.Off, SB,new DateTime(2015,3,8)),
                 Assignment.Create(Role.Off, RoB,new DateTime(2015,3,8)),
                 Assignment.Create(Role.Off, RB,new DateTime(2015,3,8)),
@@ -194,12 +194,12 @@ namespace scheduler
                 Assignment.Create(Role.Off, RE,new DateTime(2015,3,8)),
                 Assignment.Create(Role.Off, NF,new DateTime(2015,3,8)),
                 Assignment.Create(Role.Off, CG,new DateTime(2015,3,8)),
-                Assignment.Create(Role.Off, JH,new DateTime(2015,3,8)),
+                Assignment.Create(Role.PM, JH,new DateTime(2015,3,8)),
                 Assignment.Create(Role.Off, CH,new DateTime(2015,3,8)),
                 Assignment.Create(Role.Off, SM,new DateTime(2015,3,8)),
                 Assignment.Create(Role.Off, EM,new DateTime(2015,3,8)),
                 Assignment.Create(Role.Off, LS,new DateTime(2015,3,8)),
-                Assignment.Create(Role.Off, YS,new DateTime(2015,3,8)),
+                Assignment.Create(Role.AM, YS,new DateTime(2015,3,8)),
                 Assignment.Create(Role.Off, JT,new DateTime(2015,3,8)),
                 Assignment.Create(Role.Off, CW,new DateTime(2015,3,8)),
                  //March 9th
@@ -302,16 +302,16 @@ namespace scheduler
                 Assignment.Create(Role.Off, StB,new DateTime(2015,3,14)),
                 Assignment.Create(Role.Off, SB,new DateTime(2015,3,14)),
                 Assignment.Create(Role.Off, RoB,new DateTime(2015,3,14)),
-                Assignment.Create(Role.Off, RB,new DateTime(2015,3,14)),
-                Assignment.Create(Role.Off, CC,new DateTime(2015,3,14)),
+                Assignment.Create(Role.CV, RB,new DateTime(2015,3,14)),
+                Assignment.Create(Role.SevenToThree, CC,new DateTime(2015,3,14)),
                 Assignment.Create(Role.Off, CE,new DateTime(2015,3,14)),
                 Assignment.Create(Role.Off, RE,new DateTime(2015,3,14)),
                 Assignment.Create(Role.Off, NF,new DateTime(2015,3,14)),
                 Assignment.Create(Role.Off, CG,new DateTime(2015,3,14)),
                 Assignment.Create(Role.Off, JH,new DateTime(2015,3,14)),
                 Assignment.Create(Role.Off, CH,new DateTime(2015,3,14)),
-                Assignment.Create(Role.Off, SM,new DateTime(2015,3,14)),
-                Assignment.Create(Role.Off, EM,new DateTime(2015,3,14)),
+                Assignment.Create(Role.PM, SM,new DateTime(2015,3,14)),
+                Assignment.Create(Role.AM, EM,new DateTime(2015,3,14)),
                 Assignment.Create(Role.Off, LS,new DateTime(2015,3,14)),
                 Assignment.Create(Role.Off, YS,new DateTime(2015,3,14)),
                 Assignment.Create(Role.Off, JT,new DateTime(2015,3,14)),
@@ -321,7 +321,7 @@ namespace scheduler
                 Assignment.Create(Role.Off, StB,new DateTime(2015,3,15)),
                 Assignment.Create(Role.Off, SB,new DateTime(2015,3,15)),
                 Assignment.Create(Role.Off, RoB,new DateTime(2015,3,15)),
-                Assignment.Create(Role.Off, RB,new DateTime(2015,3,15)),
+                Assignment.Create(Role.CV, RB,new DateTime(2015,3,15)),
                 Assignment.Create(Role.Off, CC,new DateTime(2015,3,15)),
                 Assignment.Create(Role.Off, CE,new DateTime(2015,3,15)),
                 Assignment.Create(Role.Off, RE,new DateTime(2015,3,15)),
@@ -329,8 +329,8 @@ namespace scheduler
                 Assignment.Create(Role.Off, CG,new DateTime(2015,3,15)),
                 Assignment.Create(Role.Off, JH,new DateTime(2015,3,15)),
                 Assignment.Create(Role.Off, CH,new DateTime(2015,3,15)),
-                Assignment.Create(Role.Off, SM,new DateTime(2015,3,15)),
-                Assignment.Create(Role.Off, EM,new DateTime(2015,3,15)),
+                Assignment.Create(Role.PM, SM,new DateTime(2015,3,15)),
+                Assignment.Create(Role.AM, EM,new DateTime(2015,3,15)),
                 Assignment.Create(Role.Off, LS,new DateTime(2015,3,15)),
                 Assignment.Create(Role.Off, YS,new DateTime(2015,3,15)),
                 Assignment.Create(Role.Off, JT,new DateTime(2015,3,15)),
@@ -438,17 +438,17 @@ namespace scheduler
                 Assignment.Create(Role.Off, RB,new DateTime(2015,3,21)),
                 Assignment.Create(Role.Off, CC,new DateTime(2015,3,21)),
                 Assignment.Create(Role.Off, CE,new DateTime(2015,3,21)),
-                Assignment.Create(Role.Off, RE,new DateTime(2015,3,21)),
+                Assignment.Create(Role.CV, RE,new DateTime(2015,3,21)),
                 Assignment.Create(Role.Off, NF,new DateTime(2015,3,21)),
                 Assignment.Create(Role.Off, CG,new DateTime(2015,3,21)),
                 Assignment.Create(Role.Off, JH,new DateTime(2015,3,21)),
-                Assignment.Create(Role.Off, CH,new DateTime(2015,3,21)),
+                Assignment.Create(Role.PM, CH,new DateTime(2015,3,21)),
                 Assignment.Create(Role.Off, SM,new DateTime(2015,3,21)),
                 Assignment.Create(Role.Off, EM,new DateTime(2015,3,21)),
-                Assignment.Create(Role.Off, LS,new DateTime(2015,3,21)),
+                Assignment.Create(Role.AM, LS,new DateTime(2015,3,21)),
                 Assignment.Create(Role.Off, YS,new DateTime(2015,3,21)),
                 Assignment.Create(Role.Off, JT,new DateTime(2015,3,21)),
-                Assignment.Create(Role.Off, CW,new DateTime(2015,3,21)),
+                Assignment.Create(Role.SevenToThree, CW,new DateTime(2015,3,21)),
                  //March 22nd
                 Assignment.Create(Role.Off, SA,new DateTime(2015,3,22)),
                 Assignment.Create(Role.Off, StB,new DateTime(2015,3,22)),
@@ -457,14 +457,14 @@ namespace scheduler
                 Assignment.Create(Role.Off, RB,new DateTime(2015,3,22)),
                 Assignment.Create(Role.Off, CC,new DateTime(2015,3,22)),
                 Assignment.Create(Role.Off, CE,new DateTime(2015,3,22)),
-                Assignment.Create(Role.Off, RE,new DateTime(2015,3,22)),
+                Assignment.Create(Role.CV, RE,new DateTime(2015,3,22)),
                 Assignment.Create(Role.Off, NF,new DateTime(2015,3,22)),
                 Assignment.Create(Role.Off, CG,new DateTime(2015,3,22)),
                 Assignment.Create(Role.Off, JH,new DateTime(2015,3,22)),
-                Assignment.Create(Role.Off, CH,new DateTime(2015,3,22)),
+                Assignment.Create(Role.PM, CH,new DateTime(2015,3,22)),
                 Assignment.Create(Role.Off, SM,new DateTime(2015,3,22)),
                 Assignment.Create(Role.Off, EM,new DateTime(2015,3,22)),
-                Assignment.Create(Role.Off, LS,new DateTime(2015,3,22)),
+                Assignment.Create(Role.AM, LS,new DateTime(2015,3,22)),
                 Assignment.Create(Role.Off, YS,new DateTime(2015,3,22)),
                 Assignment.Create(Role.Off, JT,new DateTime(2015,3,22)),
                 Assignment.Create(Role.Off, CW,new DateTime(2015,3,22)),
@@ -567,29 +567,29 @@ namespace scheduler
                 Assignment.Create(Role.Off, SA,new DateTime(2015,3,28)),
                 Assignment.Create(Role.Off, StB,new DateTime(2015,3,28)),
                 Assignment.Create(Role.Off, SB,new DateTime(2015,3,28)),
-                Assignment.Create(Role.Off, RoB,new DateTime(2015,3,28)),
+                Assignment.Create(Role.CV, RoB,new DateTime(2015,3,28)),
                 Assignment.Create(Role.Off, RB,new DateTime(2015,3,28)),
                 Assignment.Create(Role.Off, CC,new DateTime(2015,3,28)),
-                Assignment.Create(Role.Off, CE,new DateTime(2015,3,28)),
+                Assignment.Create(Role.PM, CE,new DateTime(2015,3,28)),
                 Assignment.Create(Role.Off, RE,new DateTime(2015,3,28)),
                 Assignment.Create(Role.Off, NF,new DateTime(2015,3,28)),
-                Assignment.Create(Role.Off, CG,new DateTime(2015,3,28)),
+                Assignment.Create(Role.SevenToThree, CG,new DateTime(2015,3,28)),
                 Assignment.Create(Role.Off, JH,new DateTime(2015,3,28)),
                 Assignment.Create(Role.Off, CH,new DateTime(2015,3,28)),
                 Assignment.Create(Role.Off, SM,new DateTime(2015,3,28)),
                 Assignment.Create(Role.Off, EM,new DateTime(2015,3,28)),
                 Assignment.Create(Role.Off, LS,new DateTime(2015,3,28)),
                 Assignment.Create(Role.Off, YS,new DateTime(2015,3,28)),
-                Assignment.Create(Role.Off, JT,new DateTime(2015,3,28)),
+                Assignment.Create(Role.AM, JT,new DateTime(2015,3,28)),
                 Assignment.Create(Role.Off, CW,new DateTime(2015,3,28)),
                  //March 29th
                 Assignment.Create(Role.Off, SA,new DateTime(2015,3,29)),
                 Assignment.Create(Role.Off, StB,new DateTime(2015,3,29)),
                 Assignment.Create(Role.Off, SB,new DateTime(2015,3,29)),
-                Assignment.Create(Role.Off, RoB,new DateTime(2015,3,29)),
+                Assignment.Create(Role.CV, RoB,new DateTime(2015,3,29)),
                 Assignment.Create(Role.Off, RB,new DateTime(2015,3,29)),
                 Assignment.Create(Role.Off, CC,new DateTime(2015,3,29)),
-                Assignment.Create(Role.Off, CE,new DateTime(2015,3,29)),
+                Assignment.Create(Role.PM, CE,new DateTime(2015,3,29)),
                 Assignment.Create(Role.Off, RE,new DateTime(2015,3,29)),
                 Assignment.Create(Role.Off, NF,new DateTime(2015,3,29)),
                 Assignment.Create(Role.Off, CG,new DateTime(2015,3,29)),
@@ -599,7 +599,7 @@ namespace scheduler
                 Assignment.Create(Role.Off, EM,new DateTime(2015,3,29)),
                 Assignment.Create(Role.Off, LS,new DateTime(2015,3,29)),
                 Assignment.Create(Role.Off, YS,new DateTime(2015,3,29)),
-                Assignment.Create(Role.Off, JT,new DateTime(2015,3,29)),
+                Assignment.Create(Role.AM, JT,new DateTime(2015,3,29)),
                 Assignment.Create(Role.Off, CW,new DateTime(2015,3,29)),
                  //March 30th
                 Assignment.Create(Role.C2, SA,new DateTime(2015,3,30)),

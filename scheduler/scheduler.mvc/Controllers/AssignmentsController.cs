@@ -35,11 +35,12 @@ namespace scheduler.mvc.Controllers
         }
 
         // GET: Assignments/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(int? id)
         {
+            if (id == null){id = 0;}
             var mockRepo = MockRepository.Create();
 
-            return View(mockRepo.Assignments[id]);
+            return View(mockRepo.Assignments[id.Value]);
         }
 
         // GET: Assignments/Create
@@ -65,11 +66,13 @@ namespace scheduler.mvc.Controllers
         }
 
         // GET: Assignments/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(int? id)
         {
+            if (id == null) { id = 0; }
+
             var mockRepo = MockRepository.Create();
 
-            return View(mockRepo.Assignments[id]);
+            return View(mockRepo.Assignments[id.Value]);
         }
 
         // POST: Assignments/Edit/5
@@ -89,11 +92,13 @@ namespace scheduler.mvc.Controllers
         }
 
         // GET: Assignments/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int? id)
         {
+            if (id == null) { id = 0; }
+
             var mockRepo = MockRepository.Create();
 
-            return View(mockRepo.Assignments[id]);
+            return View(mockRepo.Assignments[id.Value]);
         }
 
         // POST: Assignments/Delete/5

@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace scheduler
 {
-  public  interface IContact
+    public interface IContact
     {
-       string Phone { get; set; }
-       string Email { get; set; }
-       string Address { get; set; }
-      
+        int Id { get; set; }
+        string Phone { get; set; }
+        string Email { get; set; }
+        string Address { get; set; }
     }
 }

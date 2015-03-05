@@ -8,6 +8,7 @@ namespace scheduler
 {
     public interface IAssignment
     {
+        int Id { get; set; }
         Role Role { get; set; }
         IEmployee Employee { get; set; }
         DateTime Date { get; set; }

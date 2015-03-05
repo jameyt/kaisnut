@@ -8,6 +8,7 @@ namespace scheduler
 {
     public class Assignment:IAssignment
     {
+        public int Id { get; set; }
         public Role Role { get; set; }
         public IEmployee Employee { get; set; }
         public DateTime Date { get; set; }
@@ -87,8 +88,7 @@ namespace scheduler
                     return "";
             }
         }
-
-
+        
         public string FormattedRole
         {
             get { return FormatRole(); }

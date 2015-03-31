@@ -1,0 +1,133 @@
+﻿@using scheduler
+@model IEnumerable<scheduler.IAssignment>
+
+@{
+    ViewBag.Title = "Assignments";
+}
+
+<h2>Assignments</h2>
+
+@*<p>
+    @Html.ActionLink("Create New", "Create")
+</p>*@
+<table class="table">
+    <tr>
+        <th>
+            @Html.ActionLink("Create New", "Create")
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Role)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Employee.First)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Employee.Last)
+        </th>
+
+    </tr>
+
+    <tr>
+        @*<td>
+            Filters
+        </td>
+        <td>
+            @Html.DropDownListFor(model => null, EnumHelper.GetSelectList(typeof(Role)))
+        </td>
+        <td>
+            @Html.EditorFor(model => null, new { htmlAttributes = new { @class = "form-control" } })
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Employee.First)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Employee.Last)
+        </td>*@
+
+
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <td class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Filter" class="btn btn-default"/>
+                    @*<a class="btn btn-default" href=@("../assignments/index?month=" + (@DateTime.Now.Month+1))>Schedule &raquo;</a>*@
+                </div>
+            </td>
+
+            <td>
+                @Html.DropDownList("role",EnumHelper.GetSelectList(typeof(Role)))
+
+                @*@Html.LabelFor(model => model.ToList()[0].Role, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.DropDownListFor(model => model.ToList()[0].Role, EnumHelper.GetSelectList(typeof(Role)))
+                    @Html.ValidationMessageFor(model => model.ToList()[0].Role, "", new { @class = "text-danger" })
+                </div>*@
+            </td>
+
+            <td>
+                @*@Html.LabelFor(model => model.ToList()[0].Date, htmlAttributes: new { @class = "control-label col-md-2" })*@
+                @*<div class="col-md-10">*@
+                    @Html.TextBox("month")  
+                    @*@Html.EditorFor(model => model.ToList()[0].Date, new {htmlAttributes = new {@class = "form-control"}})
+                    @Html.ValidationMessageFor(model => model.ToList()[0].Date, "", new {@class = "text-danger"})*@
+                @*</div>*@
+            </td>
+
+            <td>
+                @Html.TextBox("first")
+                @*@Html.LabelFor(model => model.ToList()[0].Employee.First, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.ToList()[0].Employee.First, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.ToList()[0].Employee.First, "", new { @class = "text-danger" })
+                </div>*@
+            </td>
+
+            <td>
+                @Html.TextBox("last")
+                @*@Html.LabelFor(model => model.ToList()[0].Employee.Last, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ToList()[0].Employee.Last, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ToList()[0].Employee.Last, "", new { @class = "text-danger" })
+            </div>*@
+            </td>
+
+            
+           
+        }
+
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = ((List<IAssignment>)Model).IndexOf(item) }) |
+                @Html.ActionLink("Details", "Details", new { id = ((List<IAssignment>)Model).IndexOf(item) }) |
+                @Html.ActionLink("Delete", "Delete", new { id = ((List<IAssignment>)Model).IndexOf(item) })
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Role)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ShortDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Employee.First)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Employee.Last)
+            </td>
+
+        </tr>
+    }
+
+</table>

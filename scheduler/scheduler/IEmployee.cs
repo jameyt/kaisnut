@@ -8,20 +8,21 @@ namespace scheduler
 {
     public interface IEmployee : IEquatable<Employee>
     {
-      string First { get; set; }
-      string Last { get; set; }
-      string Initials { get; set; }
+        int Id { get; set; }
+        string First { get; set; }
+        string Last { get; set; }
+        string Initials { get; set; }
 
-      DateTime Start { get; set; }
+        DateTime Start { get; set; }
 
-      double YearsService { get; }
+        double YearsService { get; }
 
-      IContact Contact { get; set; }
+        IContact Contact { get; set; }
 
-      double VacationDaysRemaining { get; set; }
+        double VacationDaysRemaining { get; set; }
 
-      List<IVacation> VacationScheduled { get; set; }
-      List<IVacation> VacationRequested { get; set; }
+        List<IVacation> VacationScheduled { get; set; }
+        List<IVacation> VacationRequested { get; set; }
 
 
     }

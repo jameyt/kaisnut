@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 
 namespace scheduler
 {
-   public interface IAssignment
+    public interface IAssignment
     {
-       Role Role { get; set; }
-       IEmployee Employee { get; set; }
-       DateTime Date { get; set; }
-
-
+        int Id { get; set; }
+        Role Role { get; set; }
+        IEmployee Employee { get; set; }
+        DateTime Date { get; set; }
+        string ShortDate { get; }
+        string FormattedRole { get; }
     }
 }

@@ -48,8 +48,11 @@ namespace scheduler
             var JT = Employee.Create("Jim", "Tyler", "JT", DateTime.Now, "417-206-8005", "", ""); Employees.Add(JT);
             var CW = Employee.Create("Curt", "Williams", "CW", DateTime.Now, "417-833-9007", "", ""); Employees.Add(CW);
 
+            Assignments = new List<IAssignment>();
+
             SeedMarch();
             SeedApril();
+            SeedMay();
         }
 
         public void SeedMarch()
@@ -1860,6 +1863,25 @@ namespace scheduler
                 Assignment.Create(Role.Off, YS,new DateTime(2015,5,30)),
                 Assignment.Create(Role.Off, JT,new DateTime(2015,5,30)),
                 Assignment.Create(Role.Off, CW,new DateTime(2015,5,30)),
+                //May 31th
+                Assignment.Create(Role.Off, SA,new DateTime(2015,5,31)),
+                Assignment.Create(Role.Off, StB,new DateTime(2015,5,31)),
+                Assignment.Create(Role.Off, SB,new DateTime(2015,5,31)),
+                Assignment.Create(Role.Off, RoB,new DateTime(2015,5,31)),
+                Assignment.Create(Role.Off, RB,new DateTime(2015,5,31)),
+                Assignment.Create(Role.Off, CC,new DateTime(2015,5,31)),
+                Assignment.Create(Role.Off, CE,new DateTime(2015,5,31)),
+                Assignment.Create(Role.Off, RE,new DateTime(2015,5,31)),
+                Assignment.Create(Role.Off, NF,new DateTime(2015,5,31)),
+                Assignment.Create(Role.Off, CG,new DateTime(2015,5,31)),
+                Assignment.Create(Role.Off, JH,new DateTime(2015,5,31)),
+                Assignment.Create(Role.Off, CH,new DateTime(2015,5,31)),
+                Assignment.Create(Role.Off, SM,new DateTime(2015,5,31)),
+                Assignment.Create(Role.Off, EM,new DateTime(2015,5,31)),
+                Assignment.Create(Role.Off, LS,new DateTime(2015,5,31)),
+                Assignment.Create(Role.Off, YS,new DateTime(2015,5,31)),
+                Assignment.Create(Role.Off, JT,new DateTime(2015,5,31)),
+                Assignment.Create(Role.Off, CW,new DateTime(2015,5,31)),
             };
 
             Assignments.AddRange(assignments);

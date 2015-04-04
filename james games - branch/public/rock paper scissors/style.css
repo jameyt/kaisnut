@@ -1,0 +1,30 @@
+body{
+	text-align: center;
+	font-family: Courier;
+	font-size: 33px;
+
+	background: -webkit-linear-gradient(left, #383838, #C0C0C0, #C0C0C0, #383838); /* For Safari 5.1 to 6.0 */
+    background: -o-linear-gradient(left, #383838, #C0C0C0, #C0C0C0, #383838); /* For Opera 11.1 to 12.0 */
+    background: -moz-linear-gradient(left, #383838, #C0C0C0, #C0C0C0, #383838); /* For Fx 3.6 to 15 */
+    background: linear-gradient(to right, #383838, #C0C0C0, #C0C0C0, #383838); /* Standard syntax (must be last) */
+
+  /*background: -webkit-linear-gradient(60deg, #404040, #888888); /* For Safari 5.1 to 6.0 */*/
+  /*background: -o-linear-gradient(45deg, red, blue); /* For Opera 11.1 to 12.0 */*/
+  /*background: -moz-linear-gradient(45deg, red, blue); /* For Firefox 3.6 to 15 */*/
+  /*background: linear-gradient(45deg, red, blue); /* Standard syntax */*/
+}
+
+img {
+	width: 400px;
+	height: 400px;
+}
+
+.hidden {
+	margin-left: auto;
+	margin-right: auto;
+	/*visibility: hidden;*/
+}
+
+.title {
+	font-size: 67px;
+}

@@ -1,5 +1,5 @@
 {
-  "name": "ServeStaticContent",
+  "name": "jamesGames",
   "version": "0.0.1",
   "dependencies": {
     "express": "^3.20.2"
@@ -9,6 +9,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "engines": {
+    "node": "0.10.x"
+  },
+  "author": "james",
   "license": "ISC"
 }

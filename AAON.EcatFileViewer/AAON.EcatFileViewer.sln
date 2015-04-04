@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AAON.EcatFileViewer", "AAON.EcatFileViewer.csproj", "{E2F3EDEB-DD02-4BE3-A9BA-BA515AB4F8A9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AAON.Ecat.Orders.Data", "..\..\AAON Software\AAON.Ecat.Orders.Data\AAON.Ecat.Orders.Data.csproj", "{B8AF855D-2807-47C1-98DE-193D24B93A09}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AefViewerTests", "..\AefViewerTests\AefViewerTests.csproj", "{F0B4F2CD-DB0A-421A-8AB0-5CE9549CC3F0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AAON.Utility.Objects", "..\..\AAON Software\AAON.Utility\AAON.Utility.Objects\AAON.Utility.Objects.csproj", "{00EF4077-2494-48B4-A41E-148DE49E877F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AAON.Utility.Data", "..\..\AAON Software\AAON.Utility\AAON.Utility.Data\AAON.Utility.Data.csproj", "{71ADB557-562A-43A6-93BC-2744DA8EC530}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E2F3EDEB-DD02-4BE3-A9BA-BA515AB4F8A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2F3EDEB-DD02-4BE3-A9BA-BA515AB4F8A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2F3EDEB-DD02-4BE3-A9BA-BA515AB4F8A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2F3EDEB-DD02-4BE3-A9BA-BA515AB4F8A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8AF855D-2807-47C1-98DE-193D24B93A09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8AF855D-2807-47C1-98DE-193D24B93A09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8AF855D-2807-47C1-98DE-193D24B93A09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8AF855D-2807-47C1-98DE-193D24B93A09}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F0B4F2CD-DB0A-421A-8AB0-5CE9549CC3F0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F0B4F2CD-DB0A-421A-8AB0-5CE9549CC3F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F0B4F2CD-DB0A-421A-8AB0-5CE9549CC3F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0B4F2CD-DB0A-421A-8AB0-5CE9549CC3F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00EF4077-2494-48B4-A41E-148DE49E877F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00EF4077-2494-48B4-A41E-148DE49E877F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00EF4077-2494-48B4-A41E-148DE49E877F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00EF4077-2494-48B4-A41E-148DE49E877F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71ADB557-562A-43A6-93BC-2744DA8EC530}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71ADB557-562A-43A6-93BC-2744DA8EC530}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71ADB557-562A-43A6-93BC-2744DA8EC530}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71ADB557-562A-43A6-93BC-2744DA8EC530}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

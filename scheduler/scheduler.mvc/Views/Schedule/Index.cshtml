@@ -7,36 +7,18 @@
 
 <h2>@DateTime.Now.Year</h2>
 
-@*<p>
-    @Html.ActionLink("Create New", "Create")
-</p>*@
-<table class="table">
-    @*<tr>
-        @*<th>
-            @Html.DisplayNameFor(model => model.Date)
-        </th>*@
-        @*<th>*@
-            @*@Html.Display(DateTime.Now.Year.ToString())
-            @DateTime.Now.Year
-        </th>
-        <th></th>
-    </tr>*@
+<br />
+<br />
+<br />
 
 @foreach (var item in Model) {
-    <tr>
-        @*<td>
-            @Html.DisplayFor(modelItem => item.Date)
-        </td>*@
-        <td>
-            @Html.ActionLink(item.Name,"Details",new {name=item.Name})
-            @*@Html.DisplayFor(modelItem => item.Name)*@
-        </td>
-        <td>
-            @*@Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })*@
-        </td>
-    </tr>
+    <div class="col-xs-12 col-sm-6 col-md-4">
+        @Html.ActionLink(item.Name, "Details", new { name = item.Name })
+    </div>
 }
-
-</table>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />

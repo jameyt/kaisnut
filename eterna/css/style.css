@@ -1,0 +1,63 @@
+html { 
+
+  height:100%;
+}
+
+
+body{
+
+	
+
+  height:100%;
+
+}
+
+div {
+	
+}
+
+img {
+	text-align: left;
+	width: 100%;
+}
+
+a{
+	
+}
+
+.navbar-logo{
+
+}
+
+.mainview{
+	background-image: url("../images/background.jpg");
+}
+
+.navbar{
+	background-color: white;
+
+}
+
+.navbar-brand{
+
+}
+
+#home-button{
+	background-color: orange;
+}
+
+.input-line{
+	padding: 0px 0px;
+}
+
+input{
+	width:100%;
+	height:100%;
+}
+
+button{
+	width:100%;
+	height:100%;
+	background-color: orange;
+	color:white;
+}

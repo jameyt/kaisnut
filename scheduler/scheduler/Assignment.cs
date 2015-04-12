@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,12 +12,13 @@ namespace scheduler
         public int Id { get; set; }
         public Role Role { get; set; }
         public IEmployee Employee { get; set; }
+        [DataType(DataType.Date)]
         public DateTime Date { get; set; }
         public string ShortDate { get { return Date.ToLongDateString(); } }
 
         private Assignment(){}
 
-        public static Assignment Create(Role role, Employee employee, DateTime date)
+        public static Assignment Create(Role role, IEmployee employee, DateTime date)
         {
             return new Assignment
             {

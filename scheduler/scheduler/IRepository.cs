@@ -10,6 +10,7 @@ namespace scheduler
     {
         List<IAssignment> Assignments { get; set; }
         List<IEmployee> Employees { get; set; }
- 
+        IEmployee GetEmployeeById(int employeeId);
+        IEmployee GetEmployeeByInitials(string employeeInitials);
     }
 }

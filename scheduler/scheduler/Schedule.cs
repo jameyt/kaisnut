@@ -33,7 +33,7 @@ namespace scheduler
             
             return schedule;
         }
-
+        
         public static ISchedule CreateEmptyThreeYear()
         {
             var schedule = new Schedule();
@@ -68,6 +68,7 @@ namespace scheduler
 
         public void AddAssignments(List<IAssignment> assignments)
         {
+            if (assignments == null) return;
             foreach (var assignment in assignments)
             {
                 AddAssignment(assignment);

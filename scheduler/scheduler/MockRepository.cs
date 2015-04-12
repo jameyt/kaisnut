@@ -27,6 +27,12 @@ namespace scheduler
 
         public void Seed()
         {
+           SeedEmployees();
+           SeedAssignments();
+        }
+
+        public void SeedEmployees()
+        {
             Employees = new List<IEmployee>();
 
             var SA = Employee.Create("Shane", "Adams", "SA", DateTime.Now, "417-499-3116", "", ""); Employees.Add(SA);
@@ -47,7 +53,10 @@ namespace scheduler
             var YS = Employee.Create("Yvonne", "Stanke", "YS", DateTime.Now, "417-862-9887", "", ""); Employees.Add(YS);
             var JT = Employee.Create("Jim", "Tyler", "JT", DateTime.Now, "417-206-8005", "", ""); Employees.Add(JT);
             var CW = Employee.Create("Curt", "Williams", "CW", DateTime.Now, "417-833-9007", "", ""); Employees.Add(CW);
+        }
 
+        public void SeedAssignments()
+        {
             Assignments = new List<IAssignment>();
 
             SeedMarch();
@@ -1885,6 +1894,16 @@ namespace scheduler
             };
 
             Assignments.AddRange(assignments);
+        }
+        
+        public IEmployee GetEmployeeById(int employeeId)
+        {
+            return (from emp in Employees where employeeId == emp.Id select emp).FirstOrDefault();
+        }
+
+        public IEmployee GetEmployeeByInitials(string employeeInitials)
+        {
+            return (from emp in Employees where employeeInitials == emp.Initials select emp).FirstOrDefault();
         }
     }
 }

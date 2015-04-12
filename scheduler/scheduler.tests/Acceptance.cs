@@ -21,8 +21,6 @@ namespace scheduler.tests
                 "Server=tcp:dzvmbj8x0g.database.windows.net,1433;Database=mercycrna;User ID=mercycrnadata@dzvmbj8x0g;Password=Coconut12;Trusted_Connection=False;Encrypt=True;Connection Timeout=30;";
             var cn = DataInteraction.CreateSqlConnection("tcp:dzvmbj8x0g.database.windows.net,1433","mercycrna","mercycrnadata","Coconut12");
             var repo = Repository.Create(cn);
-            repo.Seed();
-            repo.SaveEmployees( );
             var schedule = Schedule.Create(repo);
         }
 

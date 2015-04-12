@@ -14,7 +14,7 @@ namespace scheduler.data
     {
         private IDbConnection Connection { get; set; }
 
-        private Repository(){}
+        private Repository() { }
 
         public static Repository Create(IDbConnection cn)
         {
@@ -139,7 +139,7 @@ namespace scheduler.data
 
         private int LookUpEmployeeIdFromInitials(string initials)
         {
-            if (employees == null) {return 0;}
+            if (employees == null) { return 0; }
             var id = (from employee in employees where employee.Initials == initials select employee.Id).FirstOrDefault();
             return id;
         }
@@ -170,11 +170,11 @@ namespace scheduler.data
         public void SaveAssignments()
         {
             EmptyAssignmentsTable();
-            
+
             foreach (var assignment in Assignments)
             {
                 var assignmentParameters = GetAssignmentParameters(assignment);
-                InsertAssignment(assignmentParameters);                
+                InsertAssignment(assignmentParameters);
             }
         }
 
@@ -188,12 +188,12 @@ namespace scheduler.data
         {
             var employee = Employee.CreateEmpty();
             employee.Id = Parsers.Parser(dr["Id"], 0);
-            employee.First = Parsers.Parser(dr["First"],"");
+            employee.First = Parsers.Parser(dr["First"], "");
             employee.Last = Parsers.Parser(dr["Last"], "");
             employee.Initials = Parsers.Parser(dr["Initials"], "");
             employee.Start = Parsers.Parser(dr["Start"], DateTime.MinValue);
 
-            employee.Contact = GetContact(Parsers.Parser( dr["ContactID"],0));
+            employee.Contact = GetContact(Parsers.Parser(dr["ContactID"], 0));
 
             return employee;
         }
@@ -201,7 +201,7 @@ namespace scheduler.data
         private IContact GetContact(int id)
         {
             var parameter = DataInteraction.CreateSqlParameter("@ID", id);
-            var dt = DataInteraction.CreateDataTable("SELECT * FROM Contacts WHERE ID=@ID", new List<SqlParameter> {parameter},Connection);
+            var dt = DataInteraction.CreateDataTable("SELECT * FROM Contacts WHERE ID=@ID", new List<SqlParameter> { parameter }, Connection);
 
             var contacts = (from DataRow dr in dt.Rows select CreateContact(dr)).ToList();
 
@@ -211,14 +211,14 @@ namespace scheduler.data
         private IContact CreateContact(DataRow dr)
         {
             var contact = Contact.CreateEmpty();
-            if (dr == null){return null;}
+            if (dr == null) { return null; }
             contact.Id = Parsers.Parser(dr["ID"], 0);
             contact.Phone = Parsers.Parser(dr["Phone"], "");
             contact.Email = Parsers.Parser(dr["Email"], "");
             contact.Address = Parsers.Parser(dr["Address"], "");
             return contact;
         }
-        
+
         private void GetAssignments()
         {
             var dt = DataInteraction.CreateDataTable("SELECT * FROM Assignments", Connection);
@@ -229,13 +229,13 @@ namespace scheduler.data
         {
             var assignment = Assignment.CreateEmpty();
             assignment.Id = Parsers.Parser(dr["ID"], 0);
-            assignment.Role = (Role)Enum.Parse(typeof(Role),Parsers.Parser(dr["Role"], ""));
+            assignment.Role = (Role)Enum.Parse(typeof(Role), Parsers.Parser(dr["Role"], ""));
             assignment.Date = Parsers.Parser(dr["Date"], DateTime.MinValue);
             assignment.Employee = (from emp in employees where emp.Id == Parsers.Parser(dr["EmployeeID"], 0) select emp).FirstOrDefault(); //GetEmployee(Parsers.Parser(dr["EmployeeID"], 0));
 
             return assignment;
         }
-        
+
         private IEmployee GetEmployee(int id)
         {
             var parameter = DataInteraction.CreateSqlParameter("@ID", id);
@@ -2133,6 +2133,33 @@ namespace scheduler.data
         }
 
         #endregion
-        
+
+
+
+        public void UpdateAssignment(IAssignment assignment)
+        {
+            const string updateCommandString = "UPDATE ASSIGNMENTS SET Role=@Role, Date=@Date, EmployeeID=@EmployeeID WHERE ID=@ID";
+            var parameters = GetAssignmentParameters(assignment);
+            parameters.Add(new SqlParameter(){ParameterName = "@ID", Value = assignment.Id});
+            DataInteraction.ExecuteNonQuery(updateCommandString, parameters, Connection);
+        }
+
+        public void DeleteAssignment(int id)
+        {
+            const string deleteCommandString = "DELETE FROM ASSIGNMENTS WHERE ID=@ID";
+            var parameters = new List<SqlParameter>(){new SqlParameter(){ParameterName = "@ID",Value = id}};
+            DataInteraction.ExecuteNonQuery(deleteCommandString, parameters, Connection);
+        }
+
+        public void AddAssignment(IAssignment assignment)
+        {
+            var parameters = GetAssignmentParameters(assignment);
+            InsertAssignment(parameters);
+        }
+
+        public IAssignment GetAssignment(int id)
+        {
+            return (from assignment in assignments where assignment.Id == id select assignment).FirstOrDefault();
+        }
     }
 }

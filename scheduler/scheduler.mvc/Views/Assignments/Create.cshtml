@@ -14,6 +14,11 @@
     
     <div class="form-horizontal">
         <h4>Assignment</h4>
+        
+        <div class="text-danger">
+            @ViewBag.ErrorMessage
+        </div>
+
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">

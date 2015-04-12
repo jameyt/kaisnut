@@ -1905,5 +1905,33 @@ namespace scheduler
         {
             return (from emp in Employees where employeeInitials == emp.Initials select emp).FirstOrDefault();
         }
+
+
+        public void UpdateAssignment(IAssignment assignment)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteAssignment(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public void AddAssignment(Assignment assignment)
+        {
+            throw new NotImplementedException();
+        }
+
+
+        public void AddAssignment(IAssignment assignment)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IAssignment GetAssignment(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

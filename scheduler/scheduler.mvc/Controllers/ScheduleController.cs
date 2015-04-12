@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using scheduler.data;
 
 namespace scheduler.mvc.Controllers
 {
@@ -11,8 +12,8 @@ namespace scheduler.mvc.Controllers
         // GET: Schedule
         public ActionResult Index()
         {
-            var mockRepo = MockRepository.Create();
-            var schedule = Schedule.Create(mockRepo);
+            var repo = Repository.Create();
+            var schedule = Schedule.Create(repo);
 
             for (var i = 0; i < schedule.Years[1].Months.Count; i++)
             {
@@ -27,16 +28,16 @@ namespace scheduler.mvc.Controllers
             if (id != null)
             {
                 id--;
-                var mockRepo = MockRepository.Create();
-                var schedule = Schedule.Create(mockRepo);
+                var repo = Repository.Create();
+                var schedule = Schedule.Create(repo);
 
                 schedule.Years[1].Months[id.Value].SetName(id.Value);
                 return View(schedule.Years[1].Months[id.Value]);
             }
             else if (name != null)
             {
-                var mockRepo = MockRepository.Create();
-                var schedule = Schedule.Create(mockRepo);
+                var repo = Repository.Create();
+                var schedule = Schedule.Create(repo);
 
                 for (var i = 0; i < schedule.Years[1].Months.Count; i++)
                 {

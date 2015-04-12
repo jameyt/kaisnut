@@ -248,11 +248,8 @@
     <Content Include="Views\Schedule\Details.cshtml" />
     <Content Include="Views\Team\Index.cshtml" />
     <Content Include="Views\Schedule\Index.cshtml" />
-    <Content Include="Views\Assignments\Index.cshtml" />
-    <Content Include="Views\Assignments\Edit.cshtml" />
-    <Content Include="Views\Assignments\Details.cshtml" />
-    <Content Include="Views\Assignments\Delete.cshtml" />
     <Content Include="Views\Assignments\Create.cshtml" />
+    <Content Include="Views\Shared\Date.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -265,6 +262,10 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\..\AAON Software\AAON.Utility\AAON.Utility.Objects\AAON.Utility.Objects.csproj">
+      <Project>{00ef4077-2494-48b4-a41e-148de49e877f}</Project>
+      <Name>AAON.Utility.Objects</Name>
+    </ProjectReference>
     <ProjectReference Include="..\scheduler\scheduler.csproj">
       <Project>{588a2d27-8656-4967-92a8-f4c94b3a22a1}</Project>
       <Name>scheduler</Name>

@@ -1,0 +1,169 @@
+﻿@using scheduler
+@model IDetailedSchedule
+
+@{
+    ViewBag.Title = "Detailed Schedule";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <h1>
+                Detailed Schedule
+            </h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 text-center">
+            @Model.Date.ToLongDateString()
+        </div>
+    </div>
+    <div><br /></div>
+    <div><br /></div>
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <h3>Carthage</h3>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col-md-2 text-right">
+            AM/PM Back-Up Doc
+        </div>
+        <div class="col-md-10">
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2 text-right detailedScheduleHeader">
+            Location
+        </div>
+        <div class="col-md-3 text-center detailedScheduleHeader">
+            Surgeon
+        </div>
+        <div class="col-md-3 text-center detailedScheduleHeader">
+            Est. Time
+        </div> 
+        <div class="col-md-2 text-center detailedScheduleHeader">
+            Provider
+        </div>
+        <div class="col-md-2 text-center detailedScheduleHeader">
+            Peel-Out
+        </div>
+    </div>
+    @foreach (var detailedAssignment in Model.DetailedAssignments.Where(da => da.Hospital == Hospital.Carthage))
+    {
+        <div class="row">
+            <div class="col-md-2 text-right">
+                @detailedAssignment.Location
+            </div>
+            <div class="col-md-3 text-center">
+                @detailedAssignment.Surgeon
+            </div>
+            <div class="col-md-3 text-center">
+                @detailedAssignment.Time
+            </div>
+            <div class="col-md-2 text-center">
+                @detailedAssignment.Provider
+            </div>
+            <div class="col-md-2 text-center">
+                @detailedAssignment.PeelOut
+            </div>
+        </div>
+    }
+    <div><br /></div>
+    <div><br /></div>
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <h3>Joplin</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2 text-right">
+            AM Doc
+        </div>
+        <div class="col-md-10 text-right">
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2 text-right detailedScheduleHeader">
+            Location
+        </div>
+        <div class="col-md-3 text-center detailedScheduleHeader">
+            Surgeon
+        </div>
+        <div class="col-md-3 text-center detailedScheduleHeader">
+            Est. Time
+        </div>
+        <div class="col-md-2 text-center detailedScheduleHeader">
+            Provider
+        </div>
+        <div class="col-md-2 text-center detailedScheduleHeader">
+            Peel-Out
+        </div>
+    </div>
+    @foreach (var detailedAssignment in Model.DetailedAssignments.Where(da => da.Hospital == Hospital.Joplin))
+    {
+        <div class="row">
+            <div class="col-md-2 text-right detailedSchedule">
+                @detailedAssignment.Location
+            </div>
+            <div class="col-md-3 text-center detailedSchedule">
+                @detailedAssignment.Surgeon
+            </div>
+            <div class="col-md-3 text-center detailedSchedule">
+                @detailedAssignment.Time
+            </div>
+            <div class="col-md-2 text-center detailedSchedule">
+                @detailedAssignment.Provider
+            </div>
+            <div class="col-md-2 text-center detailedSchedule">
+                @detailedAssignment.PeelOut
+            </div>
+        </div>
+    }
+    <div><br /></div>
+    <div><br /></div>
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <h3>On-Call Providers</h3>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-3 text-center detailedScheduleHeader">
+            Provider
+        </div>
+        <div class="col-md-3 text-center detailedScheduleHeader">
+            Name
+        </div>
+        <div class="col-md-3 text-center detailedScheduleHeader">
+            Notes
+        </div>
+        <div class="col-md-3 text-center detailedScheduleHeader">
+            In-Time
+        </div>
+    </div>
+    @foreach (var callProvider in Model.CallProviders)
+    {
+        <div class="row">
+            <div class="col-md-3 text-center detailedSchedule">
+                @callProvider.Provider
+            </div>
+            <div class="col-md-3 text-center detailedSchedule">
+                @callProvider.Name
+            </div>
+            <div class="col-md-3 text-center detailedSchedule">
+                @callProvider.Notes
+            </div>
+            <div class="col-md-3 text-center detailedSchedule">
+                @callProvider.InTime
+            </div>
+        </div>
+    }
+    <div><br /></div>
+    <div><br /></div>
+    <div class="text-center">
+        @Html.ActionLink("Edit Detailed Schedule", "Edit", new { month = Model.Date.Month, day = Model.Date.Day, year = Model.Date.Year })
+    </div>
+</div>

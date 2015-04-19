@@ -14,6 +14,10 @@ namespace scheduler
 
         public List<IEmployee> Employees { get; set; }
 
+        public List<IDetailedAssignment> DetailedAssignments { get; set; }
+
+        public List<ICallProvider> CallProviders { get; set; }
+
         private MockRepository() { }
 
         public static MockRepository Create()
@@ -1932,6 +1936,33 @@ namespace scheduler
         public IAssignment GetAssignment(int id)
         {
             throw new NotImplementedException();
+        }
+
+
+        public List<IDetailedAssignment> GetDetailedAssignments(DateTime date)
+        {
+            return
+                (from detailedAssignment in DetailedAssignments
+                 where detailedAssignment.Date.Date == date.Date
+                 select detailedAssignment).ToList();
+        }
+
+        public List<ICallProvider> GetCallProviders(DateTime date)
+        {
+            return
+                (from callProvider in CallProviders
+                 where callProvider.Date.Date == date.Date
+                 select callProvider).ToList();
+        }
+
+        public IDetailedSchedule GetDetailedSchedule(DateTime date)
+        {
+            var detailedSchedule = DetailedSchedule.Create();
+            detailedSchedule.Date = date;
+            detailedSchedule.DetailedAssignments = GetDetailedAssignments(date);
+            detailedSchedule.CallProviders = GetCallProviders(date);
+
+            return detailedSchedule;
         }
     }
 }

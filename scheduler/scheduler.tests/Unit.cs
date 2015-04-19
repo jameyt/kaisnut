@@ -18,7 +18,7 @@ namespace scheduler.tests
         }
 
         [TestMethod]
-        public void MockFillsMarchSuccessfully()
+        public void MockSeedsMarchSuccessfully()
         {
             var repo = MockRepository.Create();
             repo.Seed();

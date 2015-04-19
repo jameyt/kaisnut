@@ -1,6 +1,7 @@
 ﻿body {
     padding-top: 50px;
     padding-bottom: 20px;
+    
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -89,4 +90,27 @@ textarea {
   width: 280px;
   word-spacing: 0px;
   writing-mode: lr-tb;
+}
+
+h1 {
+    font-size: 55px;
+}
+
+h3 {
+    font-size: 45px;
+}
+
+.detailedScheduleHeader {
+    border-bottom: 1px solid rgb(12, 227, 172);
+    font-size: 30px;
+}
+
+.detailedSchedule {
+    /*border: 1px solid rgb(12, 227, 172);*/
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+input {
+    width:100%
 }

@@ -16,5 +16,6 @@ namespace scheduler
         void DeleteAssignment(int id);
         void AddAssignment(IAssignment assignment);
         IAssignment GetAssignment(int id);
+        IDetailedSchedule GetDetailedSchedule(DateTime date);
     }
 }

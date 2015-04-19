@@ -19,8 +19,11 @@ namespace scheduler.data
         public static Repository Create(IDbConnection cn)
         {
             var repo = new Repository() { Connection = cn };
-            repo.GetEmployees();
-            repo.GetAssignments();
+            //repo.GetEmployees();
+            //repo.GetAssignments();
+            repo.SeedDetailedSchedule();
+            repo.SaveDetailedAssignments();
+            repo.SaveCallProviders();
             return repo;
         }
 
@@ -36,21 +39,59 @@ namespace scheduler.data
         {
             GetEmployees();
             GetAssignments();
+            GetDetailedAssignments();
+            GetCallProviders();
         }
 
-        private List<IAssignment> assignments;
+        public void Clear()
+        {
+            _assignments = null;
+            _employees = null;
+            _detailedAssignments = null;
+            _callProviders = null;
+        }
+
+        private List<IAssignment> _assignments;
         public List<IAssignment> Assignments
         {
-            get { return assignments; }
-            set { assignments = value; }
+            get
+            {
+                if (_assignments == null) { GetAssignments(); }
+                return _assignments;
+            }
+            set { _assignments = value; }
         }
 
-        private List<IEmployee> employees;
+        private List<IEmployee> _employees;
         public List<IEmployee> Employees
         {
-            get { return employees; }
-            set { employees = value; }
+            get
+            {
+                if (_employees == null) { GetEmployees(); }
+                return _employees;
+            }
+            set { _employees = value; }
         }
+
+        private List<IDetailedAssignment> _detailedAssignments;
+        public List<IDetailedAssignment> DetailedAssignments
+        {
+            get
+            {
+                if (_detailedAssignments == null) { GetDetailedAssignments(); }
+                return _detailedAssignments;
+            }
+            set { _detailedAssignments = value; }
+        }
+
+        private List<ICallProvider> _callProviders;
+        public List<ICallProvider> CallProviders
+        {
+            get { if (_callProviders == null) { GetCallProviders(); } return _callProviders; }
+            set { _callProviders = value; }
+        }
+
+        #region empty
 
         private void EmptyEmployeesTable()
         {
@@ -70,15 +111,26 @@ namespace scheduler.data
             DataInteraction.ExecuteNonQuery(deleteCommand, Connection);
         }
 
-        private List<SqlParameter> GetContactParameters(IEmployee employee)
+        private void EmptyDetailedAssignmentsTable()
         {
-            var parameters = new List<SqlParameter>
-                {
-                    DataInteraction.CreateSqlParameter("@phone", employee.Contact.Phone),
-                    DataInteraction.CreateSqlParameter("@email", employee.Contact.Email),
-                    DataInteraction.CreateSqlParameter("@address", employee.Contact.Address)
-                };
-            return parameters;
+            const string deleteCommand = "TRUNCATE TABLE DETAILEDASSIGNMENTS";
+            DataInteraction.ExecuteNonQuery(deleteCommand, Connection);
+        }
+
+        private void EmptyCallProvidersTable()
+        {
+            const string deleteCommand = "TRUNCATE TABLE CALLPROVIDERS";
+            DataInteraction.ExecuteNonQuery(deleteCommand, Connection);
+        }
+
+        #endregion
+
+        #region insert
+
+        private void InsertEmployee(List<SqlParameter> parameters)
+        {
+            const string insertEmployeeCommand = "INSERT INTO EMPLOYEES (First, Last, Initials, Start, ContactId) VALUES (@first,@last,@initials,@start,@contactId)";
+            DataInteraction.ExecuteNonQuery(insertEmployeeCommand, parameters, Connection);
         }
 
         private void InsertContact(List<SqlParameter> parameters)
@@ -87,68 +139,27 @@ namespace scheduler.data
             DataInteraction.ExecuteNonQuery(insertContactCommand, parameters, Connection);
         }
 
-        private List<SqlParameter> GetEmployeeParameters(IEmployee employee)
-        {
-            var parameters = new List<SqlParameter>
-                {
-                    DataInteraction.CreateSqlParameter("@first", employee.First),
-                    DataInteraction.CreateSqlParameter("@last", employee.Last),
-                    DataInteraction.CreateSqlParameter("@initials", employee.Initials),
-                    DataInteraction.CreateSqlParameter("@start", employee.Start),
-                    DataInteraction.CreateSqlParameter("@contactId", employee.Contact.Id)
-                };
-            return parameters;
-        }
-
-        private void InsertEmployee(List<SqlParameter> parameters)
-        {
-            const string insertEmployeeCommand = "INSERT INTO EMPLOYEES (First, Last, Initials, Start, ContactId) VALUES (@first,@last,@initials,@start,@contactId)";
-            DataInteraction.ExecuteNonQuery(insertEmployeeCommand, parameters, Connection);
-        }
-
-        private int GetContactIdForCurrentEmployee(IEmployee employee)
-        {
-            var phone = DataInteraction.CreateSqlParameter("@phone", employee.Contact.Phone);
-            var contactDt = DataInteraction.CreateDataTable("SELECT * FROM CONTACTS WHERE Phone=@phone", new List<SqlParameter> { phone }, Connection);
-            var contactId = (int)contactDt.Rows[0]["Id"];
-            return contactId;
-        }
-
-        private List<SqlParameter> GetAssignmentParameters(IAssignment assignment)
-        {
-            if (assignment.Employee.Id == 0)
-            {
-                assignment.Employee.Id = LookUpEmployeeIdFromInitials(assignment.Employee.Initials);
-                //throw new Exception("Assignment not correctly associated to employee.");
-                if (assignment.Employee.Id == 0)
-                {
-                    throw new Exception("Assignment STILL not correctly associated to employee.");
-                }
-            }
-
-
-
-            var parameters = new List<SqlParameter>
-                {
-                    DataInteraction.CreateSqlParameter("@Role", assignment.Role),
-                    DataInteraction.CreateSqlParameter("@Date", assignment.Date),
-                    DataInteraction.CreateSqlParameter("@EmployeeID", assignment.Employee.Id)
-                };
-            return parameters;
-        }
-
-        private int LookUpEmployeeIdFromInitials(string initials)
-        {
-            if (employees == null) { return 0; }
-            var id = (from employee in employees where employee.Initials == initials select employee.Id).FirstOrDefault();
-            return id;
-        }
-
         private void InsertAssignment(List<SqlParameter> parameters)
         {
             const string insertAssignmentCommand = "INSERT INTO Assignments (Role, Date, EmployeeID) VALUES (@Role,@Date,@EmployeeID)";
             DataInteraction.ExecuteNonQuery(insertAssignmentCommand, parameters, Connection);
         }
+
+        private void InsertDetailedAssignment(List<SqlParameter> parameters)
+        {
+            const string insertDetailedAssignmentCommand = "INSERT INTO DetailedAssignments (Location, Surgeon, Time, Provider, PeelOut, Hospital, Date) Values (@Location, @Surgeon, @Time, @Provider, @PeelOut, @Hospital, @Date)";
+            DataInteraction.ExecuteNonQuery(insertDetailedAssignmentCommand, parameters, Connection);
+        }
+
+        private void InsertCallProvider(List<SqlParameter> parameters)
+        {
+            const string insertAssignmentCommand = "INSERT INTO CallProviders (Provider,Name,InTime,Notes,Hospital,Date) VALUES (@Provider,@Name,@InTime,@Notes,@Hospital,@Date)";
+            DataInteraction.ExecuteNonQuery(insertAssignmentCommand, parameters, Connection);
+        }
+
+        #endregion
+
+        #region save
 
         public void SaveEmployees()
         {
@@ -178,10 +189,251 @@ namespace scheduler.data
             }
         }
 
+        public void SaveCallProviders()
+        {
+            EmptyCallProvidersTable();
+
+            foreach (var callProvider in CallProviders)
+            {
+                var callProviderParameters = GetCallProviderParameters(callProvider);
+                InsertCallProvider(callProviderParameters);
+            }
+        }
+
+        public void SaveDetailedAssignments()
+        {
+            EmptyDetailedAssignmentsTable();
+
+            foreach (var detailedAssignment in DetailedAssignments)
+            {
+                var detailedAssignmentParameters = GetDetailedAssignmentParameters(detailedAssignment);
+                InsertDetailedAssignment(detailedAssignmentParameters);
+            }
+        }
+
+        #endregion
+
+        #region get
+
+        private List<SqlParameter> GetContactParameters(IEmployee employee)
+        {
+            var parameters = new List<SqlParameter>
+                {
+                    DataInteraction.CreateSqlParameter("@phone", employee.Contact.Phone),
+                    DataInteraction.CreateSqlParameter("@email", employee.Contact.Email),
+                    DataInteraction.CreateSqlParameter("@address", employee.Contact.Address)
+                };
+            return parameters;
+        }
+
+        private List<SqlParameter> GetEmployeeParameters(IEmployee employee)
+        {
+            var parameters = new List<SqlParameter>
+                {
+                    DataInteraction.CreateSqlParameter("@first", employee.First),
+                    DataInteraction.CreateSqlParameter("@last", employee.Last),
+                    DataInteraction.CreateSqlParameter("@initials", employee.Initials),
+                    DataInteraction.CreateSqlParameter("@start", employee.Start),
+                    DataInteraction.CreateSqlParameter("@contactId", employee.Contact.Id)
+                };
+            return parameters;
+        }
+
+        private int GetContactIdForCurrentEmployee(IEmployee employee)
+        {
+            var phone = DataInteraction.CreateSqlParameter("@phone", employee.Contact.Phone);
+            var contactDt = DataInteraction.CreateDataTable("SELECT * FROM CONTACTS WHERE Phone=@phone", new List<SqlParameter> { phone }, Connection);
+            var contactId = (int)contactDt.Rows[0]["Id"];
+            return contactId;
+        }
+
+        private List<SqlParameter> GetAssignmentParameters(IAssignment assignment)
+        {
+            if (assignment.Employee.Id == 0)
+            {
+                assignment.Employee.Id = GetEmployeeIdFromInitials(assignment.Employee.Initials);
+                //throw new Exception("Assignment not correctly associated to employee.");
+                if (assignment.Employee.Id == 0)
+                {
+                    throw new Exception("Assignment STILL not correctly associated to employee.");
+                }
+            }
+
+
+
+            var parameters = new List<SqlParameter>
+                {
+                    DataInteraction.CreateSqlParameter("@Role", assignment.Role),
+                    DataInteraction.CreateSqlParameter("@Date", assignment.Date),
+                    DataInteraction.CreateSqlParameter("@EmployeeID", assignment.Employee.Id)
+                };
+            return parameters;
+        }
+
+        private List<SqlParameter> GetDetailedAssignmentParameters(IDetailedAssignment detailedAssignment)
+        {
+            if (detailedAssignment.Provider == "")
+            { }
+
+            var parameters = new List<SqlParameter>
+            {
+                DataInteraction.CreateSqlParameter("@Location", detailedAssignment.Location),
+                DataInteraction.CreateSqlParameter("@Surgeon", detailedAssignment.Surgeon),
+                DataInteraction.CreateSqlParameter("@Time", detailedAssignment.Time),
+                DataInteraction.CreateSqlParameter("@Provider", detailedAssignment.Provider),
+                DataInteraction.CreateSqlParameter("@PeelOut", detailedAssignment.PeelOut),
+                DataInteraction.CreateSqlParameter("@Hospital", detailedAssignment.Hospital),
+                DataInteraction.CreateSqlParameter("@Date", detailedAssignment.Date)
+            };
+            return parameters;
+        }
+
+        private List<SqlParameter> GetCallProviderParameters(ICallProvider callProvider)
+        {
+            if (callProvider.Provider == "")
+            { }
+
+            var parameters = new List<SqlParameter>
+            {
+                DataInteraction.CreateSqlParameter("@Provider", callProvider.Provider),
+                DataInteraction.CreateSqlParameter("@Name", callProvider.Name),
+                DataInteraction.CreateSqlParameter("@Notes", callProvider.Notes),
+                DataInteraction.CreateSqlParameter("@InTime", callProvider.InTime),
+                DataInteraction.CreateSqlParameter("@Hospital", callProvider.Hospital),
+                DataInteraction.CreateSqlParameter("@Date", callProvider.Date)
+
+            };
+
+            if (true) { parameters.Add(DataInteraction.CreateSqlParameter("@ID", callProvider.Id)); }
+
+            return parameters;
+        }
+
+        private int GetEmployeeIdFromInitials(string initials)
+        {
+            if (Employees == null) { return 0; }
+            var id = (from employee in Employees where employee.Initials == initials select employee.Id).FirstOrDefault();
+            return id;
+        }
+
+        private void GetDetailedAssignments()
+        {
+            var dt = DataInteraction.CreateDataTable("SELECT * FROM DetailedAssignments", Connection);
+            _detailedAssignments = (from DataRow dr in dt.Rows select CreateDetailedAssignment(dr)).ToList();
+        }
+
+        private void GetCallProviders()
+        {
+            var dt = DataInteraction.CreateDataTable("SELECT * FROM CallProviders", Connection);
+            _callProviders = (from DataRow dr in dt.Rows select CreateCallProvider(dr)).ToList();
+        }
+
         private void GetEmployees()
         {
             var dt = DataInteraction.CreateDataTable("SELECT * FROM Employees", Connection);
-            employees = (from DataRow dr in dt.Rows select CreateEmployee(dr)).ToList();
+            _employees = (from DataRow dr in dt.Rows select CreateEmployee(dr)).ToList();
+        }
+
+        private IContact GetContact(int id)
+        {
+            var parameter = DataInteraction.CreateSqlParameter("@ID", id);
+            var dt = DataInteraction.CreateDataTable("SELECT * FROM Contacts WHERE ID=@ID", new List<SqlParameter> { parameter }, Connection);
+
+            var contacts = (from DataRow dr in dt.Rows select CreateContact(dr)).ToList();
+
+            return contacts.FirstOrDefault();
+        }
+
+        private void GetAssignments()
+        {
+            var dt = DataInteraction.CreateDataTable("SELECT * FROM Assignments", Connection);
+            _assignments = (from DataRow dr in dt.Rows select CreateAssignment(dr)).ToList();
+        }
+
+        public IEmployee GetEmployeeById(int employeeId)
+        {
+            return (from emp in Employees where employeeId == emp.Id select emp).FirstOrDefault();
+        }
+
+        public IEmployee GetEmployeeByInitials(string employeeInitials)
+        {
+            return (from emp in Employees where employeeInitials == emp.Initials select emp).FirstOrDefault();
+        }
+
+        public IAssignment GetAssignment(int id)
+        {
+            return (from assignment in Assignments where assignment.Id == id select assignment).FirstOrDefault();
+        }
+
+        private IEmployee GetEmployee(int id)
+        {
+            var parameter = DataInteraction.CreateSqlParameter("@ID", id);
+            var dt = DataInteraction.CreateDataTable("SELECT * FROM Employees WHERE ID=@ID", new List<SqlParameter> { parameter }, Connection);
+
+            var emps = (from DataRow dr in dt.Rows select CreateEmployee(dr)).ToList();
+
+            return emps.FirstOrDefault();
+        }
+
+        public IDetailedAssignment GetDetailedAssignments(int id)
+        {
+            return (from detailedAssignment in DetailedAssignments where detailedAssignment.Id == id select detailedAssignment).FirstOrDefault();
+        }
+
+        public List<IDetailedAssignment> GetDetailedAssignments(DateTime date)
+        {
+            return
+                (from detailedAssignment in DetailedAssignments
+                 where detailedAssignment.Date.Date == date.Date
+                 select detailedAssignment).ToList();
+        }
+
+        public List<ICallProvider> GetCallProviders(DateTime date)
+        {
+            return
+                (from callProvider in CallProviders
+                 where callProvider.Date.Date == date.Date
+                 select callProvider).ToList();
+        }
+
+        public IDetailedSchedule GetDetailedSchedule(DateTime date)
+        {
+            var detailedSchedule = DetailedSchedule.Create();
+            detailedSchedule.Date = date;
+            detailedSchedule.DetailedAssignments = GetDetailedAssignments(date);
+            detailedSchedule.CallProviders = GetCallProviders(date);
+
+            return detailedSchedule;
+        }
+
+        #endregion
+
+        #region create
+
+        private IDetailedAssignment CreateDetailedAssignment(DataRow dr)
+        {
+            var detailedAssignment = DetailedAssignment.Create();
+            detailedAssignment.Id = Parsers.Parser(dr["Id"], 0);
+            detailedAssignment.Location = Parsers.Parser(dr["Location"], "");
+            detailedAssignment.Surgeon = Parsers.Parser(dr["Surgeon"], "");
+            detailedAssignment.Time = Parsers.Parser(dr["Time"], "");
+            detailedAssignment.Provider = Parsers.Parser(dr["Provider"], "");
+            detailedAssignment.PeelOut = Parsers.Parser(dr["PeelOut"], "");
+
+            return detailedAssignment;
+        }
+
+        private ICallProvider CreateCallProvider(DataRow dr)
+        {
+            var callProvider = CallProvider.Create();
+            callProvider.Id = Parsers.Parser(dr["Id"], 0);
+            callProvider.Provider = Parsers.Parser(dr["Provider"], "");
+            callProvider.Name = Parsers.Parser(dr["Name"], "");
+            callProvider.InTime = Parsers.Parser(dr["InTime"], "");
+            callProvider.Notes = Parsers.Parser(dr["Notes"], "");
+            callProvider.Hospital = (Hospital)Enum.Parse(typeof(Hospital), Parsers.Parser(dr["Hospital"], "")); //(Role)Enum.Parse(typeof(Role), Parsers.Parser(dr["Role"], ""));
+            callProvider.Date = Parsers.Parser(dr["Date"], DateTime.MinValue);
+            return callProvider;
         }
 
         private IEmployee CreateEmployee(DataRow dr)
@@ -198,16 +450,6 @@ namespace scheduler.data
             return employee;
         }
 
-        private IContact GetContact(int id)
-        {
-            var parameter = DataInteraction.CreateSqlParameter("@ID", id);
-            var dt = DataInteraction.CreateDataTable("SELECT * FROM Contacts WHERE ID=@ID", new List<SqlParameter> { parameter }, Connection);
-
-            var contacts = (from DataRow dr in dt.Rows select CreateContact(dr)).ToList();
-
-            return contacts.FirstOrDefault();
-        }
-
         private IContact CreateContact(DataRow dr)
         {
             var contact = Contact.CreateEmpty();
@@ -219,42 +461,18 @@ namespace scheduler.data
             return contact;
         }
 
-        private void GetAssignments()
-        {
-            var dt = DataInteraction.CreateDataTable("SELECT * FROM Assignments", Connection);
-            assignments = (from DataRow dr in dt.Rows select CreateAssignment(dr)).ToList();
-        }
-
         private IAssignment CreateAssignment(DataRow dr)
         {
             var assignment = Assignment.CreateEmpty();
             assignment.Id = Parsers.Parser(dr["ID"], 0);
             assignment.Role = (Role)Enum.Parse(typeof(Role), Parsers.Parser(dr["Role"], ""));
             assignment.Date = Parsers.Parser(dr["Date"], DateTime.MinValue);
-            assignment.Employee = (from emp in employees where emp.Id == Parsers.Parser(dr["EmployeeID"], 0) select emp).FirstOrDefault(); //GetEmployee(Parsers.Parser(dr["EmployeeID"], 0));
+            assignment.Employee = (from emp in Employees where emp.Id == Parsers.Parser(dr["EmployeeID"], 0) select emp).FirstOrDefault(); //GetEmployee(Parsers.Parser(dr["EmployeeID"], 0));
 
             return assignment;
         }
 
-        private IEmployee GetEmployee(int id)
-        {
-            var parameter = DataInteraction.CreateSqlParameter("@ID", id);
-            var dt = DataInteraction.CreateDataTable("SELECT * FROM Employees WHERE ID=@ID", new List<SqlParameter> { parameter }, Connection);
-
-            var emps = (from DataRow dr in dt.Rows select CreateEmployee(dr)).ToList();
-
-            return emps.FirstOrDefault();
-        }
-
-        public IEmployee GetEmployeeById(int employeeId)
-        {
-            return (from emp in Employees where employeeId == emp.Id select emp).FirstOrDefault();
-        }
-
-        public IEmployee GetEmployeeByInitials(string employeeInitials)
-        {
-            return (from emp in Employees where employeeInitials == emp.Initials select emp).FirstOrDefault();
-        }
+        #endregion
 
         #region seed
 
@@ -2132,24 +2350,164 @@ namespace scheduler.data
             Assignments.AddRange(assignments);
         }
 
+        private void SeedDetailedSchedule()
+        {
+            var detailedSchedule = CreateEmptySchedule(DateTime.Now);
+            detailedSchedule.DetailedAssignments[0].Surgeon = "Dr. XYZ";
+            detailedSchedule.DetailedAssignments[1].Surgeon = "Dr. ABC";
+            detailedSchedule.DetailedAssignments[2].Surgeon = "Dr. XYZ";
+            detailedSchedule.DetailedAssignments[3].Surgeon = "Dr. ABC";
+            detailedSchedule.DetailedAssignments[4].Surgeon = "Dr. XYZ";
+            detailedSchedule.DetailedAssignments[5].Surgeon = "Dr. ABC";
+            detailedSchedule.DetailedAssignments[6].Surgeon = "Dr. XYZ";
+            detailedSchedule.DetailedAssignments[7].Surgeon = "Dr. Smith";
+            detailedSchedule.DetailedAssignments[8].Surgeon = "Dr. Goldberg";
+            detailedSchedule.DetailedAssignments[9].Surgeon = "Dr. XYZ";
+            detailedSchedule.DetailedAssignments[10].Surgeon = "Dr. ABC";
+            detailedSchedule.DetailedAssignments[11].Surgeon = "Dr. ABC";
+            detailedSchedule.DetailedAssignments[12].Surgeon = "Dr. XYZ";
+            detailedSchedule.DetailedAssignments[13].Surgeon = "Dr. Last";
+
+            detailedSchedule.DetailedAssignments[0].Time = "0 HOURS";
+            detailedSchedule.DetailedAssignments[1].Time = "1 HOUR";
+            detailedSchedule.DetailedAssignments[2].Time = "2 HOURS";
+            detailedSchedule.DetailedAssignments[3].Time = "3 HOUR";
+            detailedSchedule.DetailedAssignments[4].Time = "4 HOURS";
+            detailedSchedule.DetailedAssignments[5].Time = "5 HOUR";
+            detailedSchedule.DetailedAssignments[6].Time = "6 HOURS";
+            detailedSchedule.DetailedAssignments[7].Time = "7 HOUR";
+            detailedSchedule.DetailedAssignments[8].Time = "8 HOURS";
+            detailedSchedule.DetailedAssignments[9].Time = "9 HOUR";
+            detailedSchedule.DetailedAssignments[10].Time = "10 HOURS";
+            detailedSchedule.DetailedAssignments[11].Time = "11 HOUR";
+            detailedSchedule.DetailedAssignments[12].Time = "12 HOURS";
+            detailedSchedule.DetailedAssignments[13].Time = "13 HOUR";
+
+            detailedSchedule.CallProviders[0].Name = "Jim Tyler";
+            detailedSchedule.CallProviders[1].Name = "Jim Tyler";
+            detailedSchedule.CallProviders[2].Name = "Jim Tyler";
+            detailedSchedule.CallProviders[3].Name = "Jim Tyler";
+
+            DetailedAssignments = detailedSchedule.DetailedAssignments;
+            CallProviders = detailedSchedule.CallProviders;
+
+
+        }
+
+        private IDetailedSchedule CreateEmptySchedule(DateTime date)
+        {
+            var detailedSchedule = DetailedSchedule.Create();
+            detailedSchedule.Date = date;
+
+            var detailedAssignments = new List<IDetailedAssignment>();
+            var endoscopyCarthage = CreateDefaultDetailedAssignment(date, "Endoscopy", Hospital.Carthage); detailedAssignments.Add(endoscopyCarthage);
+            var or1Carthage = CreateDefaultDetailedAssignment(date, "OR #1", Hospital.Carthage); detailedAssignments.Add(or1Carthage);
+            var or2Carthage = CreateDefaultDetailedAssignment(date, "OR #2", Hospital.Carthage); detailedAssignments.Add(or2Carthage);
+            var or3Carthage = CreateDefaultDetailedAssignment(date, "OR #3", Hospital.Carthage); detailedAssignments.Add(or3Carthage);
+            
+            var endoscopy1 = CreateDefaultDetailedAssignment(date, "Endoscopy #1", Hospital.Joplin); detailedAssignments.Add(endoscopy1);
+            var endoscopy2 = CreateDefaultDetailedAssignment(date, "Endoscopy #2", Hospital.Joplin); detailedAssignments.Add(endoscopy2);
+            var bronchoscopy = CreateDefaultDetailedAssignment(date, "Bronchoscopy", Hospital.Joplin); detailedAssignments.Add(bronchoscopy);
+            var cathLab = CreateDefaultDetailedAssignment(date, "Cath Lab", Hospital.Joplin); detailedAssignments.Add(cathLab);
+            var pv = CreateDefaultDetailedAssignment(date, "PV", Hospital.Joplin); detailedAssignments.Add(pv);
+            var ep = CreateDefaultDetailedAssignment(date, "EP", Hospital.Joplin); detailedAssignments.Add(ep);
+            var mri = CreateDefaultDetailedAssignment(date, "MRI", Hospital.Joplin); detailedAssignments.Add(mri);
+            var ob = CreateDefaultDetailedAssignment(date, "OB", Hospital.Joplin); detailedAssignments.Add(ob);
+            var or1Joplin = CreateDefaultDetailedAssignment(date, "OR #1", Hospital.Joplin); detailedAssignments.Add(or1Joplin);
+            var or2Joplin = CreateDefaultDetailedAssignment(date, "OR #2", Hospital.Joplin); detailedAssignments.Add(or2Joplin);
+            var or3Joplin = CreateDefaultDetailedAssignment(date, "OR #3", Hospital.Joplin); detailedAssignments.Add(or3Joplin);
+            var or4 = CreateDefaultDetailedAssignment(date, "OR #4", Hospital.Joplin); detailedAssignments.Add(or4);
+            var or5 = CreateDefaultDetailedAssignment(date, "OR #5", Hospital.Joplin); detailedAssignments.Add(or5);
+            var or6 = CreateDefaultDetailedAssignment(date, "OR #6", Hospital.Joplin); detailedAssignments.Add(or6);
+            
+            detailedSchedule.DetailedAssignments = detailedAssignments;
+
+            var callProviders = new List<ICallProvider>();
+            var cv = CreateDefaultCallProvider(date, "CV CRNA", "11"); callProviders.Add(cv);
+            var c2 = CreateDefaultCallProvider(date, "C-2 CRNA", "11"); callProviders.Add(c2);
+            var pmCrna = CreateDefaultCallProvider(date, "PM CALL CRNA", "18"); callProviders.Add(pmCrna);
+            var pmDoc = CreateDefaultCallProvider(date, "PM DOC", "18"); callProviders.Add(pmDoc);
+            
+            detailedSchedule.CallProviders = callProviders;
+
+            return detailedSchedule;
+        }
+
+        private ICallProvider CreateDefaultCallProvider(DateTime date,string provider, string inTime)
+        {
+            var callProvider = CreateEmptyCallProvider();
+            callProvider.Date = date;
+            callProvider.Provider = provider;
+            callProvider.InTime = inTime;
+            callProvider.Hospital = Hospital.Joplin;
+            return callProvider;
+        }
+
+        private ICallProvider CreateEmptyCallProvider()
+        {
+            var callProvider = CallProvider.Create();
+            callProvider.Date = DateTime.MinValue;
+            callProvider.Provider = "";
+            callProvider.Name = "";
+            callProvider.Notes = "";
+            callProvider.Hospital = Hospital.Unassigned;
+            return callProvider;
+        }
+
+        private IDetailedAssignment CreateDefaultDetailedAssignment(DateTime date, string location, Hospital hospital)
+        {
+            var detailedAssignment = CreateEmptyDetailedAssignment();
+            detailedAssignment.Date = date;
+            detailedAssignment.Location = location;
+            detailedAssignment.Hospital = hospital;
+            return detailedAssignment;
+        }
+
+        private IDetailedAssignment CreateEmptyDetailedAssignment()
+        {
+            var detailedAssignment = DetailedAssignment.Create();
+            detailedAssignment.Date = DateTime.MinValue;
+            detailedAssignment.Location = "";
+            detailedAssignment.Surgeon = "";
+            detailedAssignment.Time = "";
+            detailedAssignment.Provider = "";
+            detailedAssignment.PeelOut = "";
+            detailedAssignment.Hospital = Hospital.Unassigned;
+
+            return detailedAssignment;
+        }
+
         #endregion
 
-
+        #region update
 
         public void UpdateAssignment(IAssignment assignment)
         {
             const string updateCommandString = "UPDATE ASSIGNMENTS SET Role=@Role, Date=@Date, EmployeeID=@EmployeeID WHERE ID=@ID";
             var parameters = GetAssignmentParameters(assignment);
-            parameters.Add(new SqlParameter(){ParameterName = "@ID", Value = assignment.Id});
+            parameters.Add(new SqlParameter() { ParameterName = "@ID", Value = assignment.Id });
             DataInteraction.ExecuteNonQuery(updateCommandString, parameters, Connection);
         }
 
-        public void DeleteAssignment(int id)
+        public void UpdateDetailedAssignment(IDetailedAssignment detailedAssignment)
         {
-            const string deleteCommandString = "DELETE FROM ASSIGNMENTS WHERE ID=@ID";
-            var parameters = new List<SqlParameter>(){new SqlParameter(){ParameterName = "@ID",Value = id}};
-            DataInteraction.ExecuteNonQuery(deleteCommandString, parameters, Connection);
+            const string updateCommandString = "UPDATE DETAILEDASSIGNMENTS SET Location=@Location, Surgeon=@Surgeon, Time=@Time, Provider=@Provider, PeelOut=@PeelOut, Hospital=@Hospital, Date=@Date WHERE ID=@ID";
+            var parameters = GetDetailedAssignmentParameters(detailedAssignment);
+            parameters.Add(new SqlParameter() { ParameterName = "@ID", Value = detailedAssignment.Id });
+            DataInteraction.ExecuteNonQuery(updateCommandString, parameters, Connection);
         }
+
+        public void UpdateCallProvider(ICallProvider callProvider)
+        {
+            const string updateCommandString = "UPDATE CallProviders SET Provider=@Provider, Name=@Name, Notes=@Notes, InTime=@InTime, Hospital=@Hospital, Date=@Date WHERE ID=@ID";
+            var parameters = GetCallProviderParameters(callProvider);
+            parameters.Add(new SqlParameter() { ParameterName = "@ID", Value = callProvider.Id });
+            DataInteraction.ExecuteNonQuery(updateCommandString, parameters, Connection);
+        }
+
+        #endregion
+
+        #region add
 
         public void AddAssignment(IAssignment assignment)
         {
@@ -2157,9 +2515,43 @@ namespace scheduler.data
             InsertAssignment(parameters);
         }
 
-        public IAssignment GetAssignment(int id)
+        public void AddDetailedAssignment(IDetailedAssignment detailedAssignment)
         {
-            return (from assignment in assignments where assignment.Id == id select assignment).FirstOrDefault();
+            var parameters = GetDetailedAssignmentParameters(detailedAssignment);
+            InsertDetailedAssignment(parameters);
         }
+
+        public void AddCallProvider(ICallProvider callProvider)
+        {
+            var parameters = GetCallProviderParameters(callProvider);
+            InsertCallProvider(parameters);
+        }
+
+        #endregion
+
+        #region delete
+
+        public void DeleteAssignment(int id)
+        {
+            const string deleteCommandString = "DELETE FROM ASSIGNMENTS WHERE ID=@ID";
+            var parameters = new List<SqlParameter>() { new SqlParameter() { ParameterName = "@ID", Value = id } };
+            DataInteraction.ExecuteNonQuery(deleteCommandString, parameters, Connection);
+        }
+
+        public void DeleteDetailedAssignment(int id)
+        {
+            const string deleteCommandString = "DELETE FROM DETAILEDASSIGNMENTS WHERE ID=@ID";
+            var parameters = new List<SqlParameter>() { new SqlParameter() { ParameterName = "@ID", Value = id } };
+            DataInteraction.ExecuteNonQuery(deleteCommandString, parameters, Connection);
+        }
+
+        public void DeleteCallProvider(int id)
+        {
+            const string deleteCommandString = "DELETE FROM CALLPROVIDERS WHERE ID=@ID";
+            var parameters = new List<SqlParameter>() { new SqlParameter() { ParameterName = "@ID", Value = id } };
+            DataInteraction.ExecuteNonQuery(deleteCommandString, parameters, Connection);
+        }
+
+        #endregion
     }
 }

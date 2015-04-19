@@ -56,9 +56,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assignment.cs" />
+    <Compile Include="CallProvider.cs" />
+    <Compile Include="DetailedAssignment.cs" />
+    <Compile Include="DetailedSchedule.cs" />
+    <Compile Include="Hospital.cs" />
     <Compile Include="IAssignment.cs" />
+    <Compile Include="ICallProvider.cs" />
     <Compile Include="IContact.cs" />
     <Compile Include="IDay.cs" />
+    <Compile Include="IDetailedAssignment.cs" />
+    <Compile Include="IDetailedSchedule.cs" />
     <Compile Include="IEmployee.cs" />
     <Compile Include="IMonth.cs" />
     <Compile Include="IRepository.cs" />

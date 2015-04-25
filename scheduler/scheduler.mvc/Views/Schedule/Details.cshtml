@@ -4,52 +4,91 @@
     ViewBag.Title = "Month";
 }
 
-<h2>@Model.Name</h2>
+<h2 class="calendar-header">@Model.Name</h2>
 
 <div>
+    <br />
+    <br />
 
-    @*@foreach (var week in Model.Weeks)*@
-    @*@foreach (var week in Model.Days)
-    {*@
-        <div class="row">
-            <div class="col-md-12">
-                @foreach (var day in Model.Days)
+    <div class="row seven-cols">
+
+        <div class="col-md-1  col-xs-7 calendar-header"><h4>Sunday</h4></div>
+        <div class="col-md-1  col-xs-7 calendar-header"><h4>Monday</h4></div>
+        <div class="col-md-1  col-xs-7 calendar-header"><h4>Tuesday</h4></div>
+        <div class="col-md-1  col-xs-7 calendar-header"><h4>Wednesday</h4></div>
+        <div class="col-md-1  col-xs-7 calendar-header"><h4>Thursday</h4></div>
+        <div class="col-md-1  col-xs-7 calendar-header"><h4>Friday</h4></div>
+        <div class="col-md-1  col-xs-7 calendar-header"><h4>Saturday</h4></div>
+
+        @if (Model.Days[0].Date.DayOfWeek == DayOfWeek.Monday)
+        {
+            <div class="col-md-1  col-xs-7"></div>
+        }
+
+        @if (Model.Days[0].Date.DayOfWeek == DayOfWeek.Tuesday)
+        {
+            <div class="col-md-1  col-xs-7"></div>
+            <div class="col-md-1  col-xs-7"></div>
+        }
+
+        @if (Model.Days[0].Date.DayOfWeek == DayOfWeek.Wednesday)
+        {
+            <div class="col-md-1  col-xs-7"></div>
+            <div class="col-md-1  col-xs-7"></div>
+            <div class="col-md-1  col-xs-7"></div>
+        }
+
+        @if (Model.Days[0].Date.DayOfWeek == DayOfWeek.Thursday)
+        {
+            <div class="col-md-1  col-xs-7"></div>
+            <div class="col-md-1  col-xs-7"></div>
+            <div class="col-md-1  col-xs-7"></div>
+            <div class="col-md-1  col-xs-7"></div>
+        }
+
+        @if (Model.Days[0].Date.DayOfWeek == DayOfWeek.Friday)
+        {
+            <div class="col-md-1  col-xs-7"></div>
+            <div class="col-md-1  col-xs-7"></div>
+            <div class="col-md-1  col-xs-7"></div>
+            <div class="col-md-1  col-xs-7"></div>
+            <div class="col-md-1  col-xs-7"></div>
+        }
+
+        @if (Model.Days[0].Date.DayOfWeek == DayOfWeek.Saturday)
+        {
+            <div class="col-md-1  col-xs-7"></div>
+            <div class="col-md-1  col-xs-7"></div>
+            <div class="col-md-1  col-xs-7"></div>
+            <div class="col-md-1  col-xs-7"></div>
+            <div class="col-md-1  col-xs-7"></div>
+            <div class="col-md-1  col-xs-7"></div>
+        }
+
+        @foreach (var day in Model.Days)
+        {
+            <div class="col-md-1  col-xs-7">
+                @if (day.Date != DateTime.MinValue)
                 {
-                    //var width = 960 / 7.0 + "px";
-                    const string width = "col-md-4  col-xs-12";
-                    //if (day.Date.DayOfWeek == DayOfWeek.Sunday || day.Date.DayOfWeek == DayOfWeek.Saturday)
-                    //{
-                    //    width = "col-md-1  col-xs-12";
-                    //}
-                    //else
-                    //{
-                    //    width = "col-md-2 col-xs-12";
-                    //}
-                    <div class="@width">
-                        @if (day.Date != DateTime.MinValue)
-                        {
-                            @day.Date.ToLongDateString()
-                        }
-                        <br/>
-                        <br />
-                        @if (day.Assignments == null)
-                        {
-                            continue;
-                        }
-                        @foreach (var assignment in day.Assignments)
-                        {
-                            <div>
-                                &nbsp;&nbsp;&nbsp;&nbsp;
-                                @assignment.FormattedRole: @assignment.Employee.First @assignment.Employee.Last
-                                @*@assignment.Employee.Initials - @assignment.Role*@
-                                @*@assignment.Employee.First @assignment.Employee.Last - @assignment.Role;*@
-                            </div>
-                        }
-                        <br />
+                    <h5 class="calendar-header">
+                        @day.Date.Day
+                    </h5>
+                }
+                <br />
+                <br />
+                @if (day.Assignments == null)
+                {
+                    continue;
+                }
+                @foreach (var assignment in day.Assignments)
+                {
+                    <div>
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        @assignment.FormattedRole &nbsp;&nbsp; &nbsp;&nbsp;- &nbsp;&nbsp; &nbsp;&nbsp;  @assignment.Employee.First @assignment.Employee.Last
                     </div>
                 }
+                <br />
             </div>
-        </div>
-    @*}*@
-
+        }
+    </div>
 </div>
